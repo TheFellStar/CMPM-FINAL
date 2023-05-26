@@ -3,6 +3,6 @@ class Test extends Phaser.Scene {
         super('test');
     }
     create(){
-        this.add.text("This is our deployed game");
+        this.add.text(200, 200, "This is our deployed game").setFontSize(100);
     }
 }
