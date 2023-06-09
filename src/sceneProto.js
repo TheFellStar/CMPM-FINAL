@@ -154,7 +154,7 @@ class Room1 extends Phaser.Scene{
     }
     create() {
         this.cameras.main.fadeIn(1000,0,0,0);
-        this.add.text(50, 50, "This scene will be the first level scene").setFontSize(30);
+        this.add.text(50, 50, "This scene will be the first level\nEach level will be a top-down view where the player moves around interacting with stuff\nFor this prototype we will simply use clickable buttons to simulate interactable objects").setFontSize(30);
         this.rect1 = this.add.rectangle(300, 500, 50, 50, 0xff0000, 1);
         this.add.text(200, 400, "This button will travel you forward/backwards in time").setFontSize(30);
         this.rect1.setInteractive();
@@ -227,6 +227,7 @@ class Room2 extends Phaser.Scene {
         super('room2');
     }
     create(){
+        this.cameras.main.fadeIn(1000,0,0,0);
         this.add.text(50, 50, "This will be the second level").setFontSize(30);
         this.rect1 = this.add.rectangle(300, 500, 50, 50, 0xff0000, 1);
         this.add.text(200, 400, "This button will travel you forward/backwards in time").setFontSize(30);
@@ -246,7 +247,7 @@ class Room2Alt extends Phaser.Scene {
         super('room2alt');
     }
     create(){
-        this.cameras.main.fadeIn(100,0,0,0);
+        this.cameras.main.fadeIn(1000,0,0,0);
         this.rect1 = this.add.rectangle(300, 500, 50, 50, 0xff0000, 1);
         this.add.text(200, 400, "This button will travel you forward/backwards in time").setFontSize(30);
         this.rect1.setInteractive();
@@ -258,6 +259,7 @@ class Room2Alt extends Phaser.Scene {
         })
         this.add.text(1000, 800, "Each level will get 'harder'").setFontSize(30);
         this.add.text(1000, 50, "Click to continue").setFontSize(30);
+        this.rect2 = this.add.rectangle(1100, 100, 50, 50, 0x00ff00, 1);
         this.rect2.setInteractive();
         this.rect2.on('pointerdown', () => {
             this.scene.start('room3');
@@ -268,6 +270,97 @@ class Room2Alt extends Phaser.Scene {
 class Room3 extends Phaser.Scene {
     constructor(){
         super('room3');
+    }
+    create(){
+        let one = this.input.keyboard.addKey('A');
+        let two = this.input.keyboard.addKey('H');
+        let three = this.input.keyboard.addKey('I');
+        let four = this.input.keyboard.addKey('W');
+        let num = 0;
+        one.on('down', () => {
+            num = 1;
+        })
+        two.on('down', () => {
+            if(num == 1){
+                num = 2;
+            }else{
+                num = 0;
+            }
+        })
+        three.on('down', () => {
+            if(num == 2){
+                num = 3;
+            }else{
+                num = 0;
+            }
+        })
+        four.on('down', () => {
+            if(num == 3){
+                this.cameras.main.fadeOut(1000,0,0,0);
+                this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                    this.scene.start('end');
+                })
+            }else{
+                num = 0;
+            }
+        })
+
+        this.cameras.main.fadeIn(1000,0,0,0);
+        this.rect1 = this.add.rectangle(300, 500, 50, 50, 0xff0000, 1);
+        this.add.text(200, 400, "This button will travel you forward/backwards in time").setFontSize(30);
+        this.rect1.setInteractive();
+        this.rect1.on('pointerdown', () => {
+            this.cameras.main.fadeOut(1000,0,0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.start('room3alt');
+            })
+        })
+        this.add.text(50,50, "This is the last and hardest level").setFontSize(30);
+    }
+}
+
+class Room3Alt extends Phaser.Scene {
+    constructor(){
+        super('room3alt');
+    }
+    create(){
+        this.cameras.main.fadeIn(1000,0,0,0);
+        this.rect1 = this.add.rectangle(300, 500, 50, 50, 0xff0000, 1);
+        this.add.text(200, 400, "This button will travel you forward/backwards in time").setFontSize(30);
+        this.rect1.setInteractive();
+        this.rect1.on('pointerdown', () => {
+            this.cameras.main.fadeOut(1000,0,0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.start('room3');
+            })
+        })
+
+        this.rect3 = this.add.rectangle(100, 900, 50, 50, 0xffffff, 1);
+        this.rect3.setInteractive();
+        this.rect3.on('pointerdown', () => {
+            this.scene.pause('room3alt');
+            this.scene.launch('clue2');
+        })
+    }
+}
+
+class Clue2 extends Phaser.Scene {
+    constructor(){
+        super('clue2');
+    }
+    create(){
+        this.rect1 = this.add.rectangle(1000, 500, 1500, 800, 0xffffff, 1);
+        this.add.text(500, 500, "On the main level screen, press 'A', 'H', 'I', 'W' in that order", {color: '0x000000'},).setFontSize(30);
+        this.input.on('pointerdown', () => {
+            this.scene.stop('clue2');
+            this.scene.resume('room3alt');
+        })
+    }
+}
+
+class End extends Phaser.Scene {
+    constructor(){
+        super('end');
     }
     create(){
 
@@ -283,7 +376,7 @@ let config = {
         height: 1080
     },
     backgroundColor: '#301934',
-    scene: [ Menu, Scene1, Credits, Room1, Room1Alt, Clue1, Room2, Room2Alt, Room3],
+    scene: [ Menu, Scene1, Credits, Room1, Room1Alt, Clue1, Room2, Room2Alt, Room3, Room3Alt, Clue2, End],
 }
 
 let game = new Phaser.Game(config);
