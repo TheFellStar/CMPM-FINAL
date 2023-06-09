@@ -1,22 +1,3 @@
-class Logo extends Phaser.Scene{
-    constructor() {
-        super('logo');
-    }
-    preload(){
-
-    }
-    create(){
-        this.add.text(800, 500, "Logo goes here").setFontSize(50);
-
-        this.time.delayedCall(1000, () => {
-            this.cameras.main.fadeOut(1000,0,0,0);
-            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-                this.scene.start('menu')
-            })
-        })
-    }
-}
-
 class Menu extends Phaser.Scene{
     constructor(){
         super('menu');
@@ -32,7 +13,7 @@ class Menu extends Phaser.Scene{
         this.resume.setInteractive();
         this.options = this.add.text(-450, 650, "Options").setFontSize(50);
         this.options.setInteractive();
-        this.exit = this.add.text(-525, 725, "Exit").setFontSize(50);
+        this.exit = this.add.text(-525, 725, "Credits").setFontSize(50);
         this.exit.setInteractive();
 
         this.tweens.add({
@@ -104,30 +85,30 @@ class Menu extends Phaser.Scene{
                 this.scene.start('scene1');
             })
         })
+        this.exit.on('pointerdown', () => {
+            this.cameras.main.fadeOut(1000,0,0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.start('credits');
+            })
+        })
     }
 }
 
-class Scene1 extends Phaser.Scene {
+class Scene1 extends Phaser.Scene{
     constructor(){
         super('scene1');
     }
-    preload(){
-
-    }
     create(){
 
     }
 }
 
-class Scene2 extends Phaser.Scene {
+class Credits extends Phaser.Scene{
     constructor(){
-        super('scene2');
-    }
-    preload(){
-
+        super('credits');
     }
     create(){
-
+        this.add.text(800, 500, "Credits go here").setFontSize(50);
     }
 }
 
@@ -140,7 +121,7 @@ let config = {
         height: 1080
     },
     backgroundColor: '#301934',
-    scene: [ Logo, Menu, Scene1, Scene2],
+    scene: [ Menu, Scene1, Credits],
 }
 
 let game = new Phaser.Game(config);
