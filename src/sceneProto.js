@@ -1,3 +1,6 @@
+let pmenu;
+let paused = 0;
+
 class Menu extends Phaser.Scene{
     constructor(){
         super('menu');
@@ -153,6 +156,7 @@ class Room1 extends Phaser.Scene{
         super('room1');
     }
     create() {
+        paused = 1;
         this.cameras.main.fadeIn(1000,0,0,0);
         this.add.text(50, 50, "This scene will be the first level\nEach level will be a top-down view where the player moves around interacting with stuff\nFor this prototype we will simply use clickable buttons to simulate interactable objects").setFontSize(30);
         this.rect1 = this.add.rectangle(300, 500, 50, 50, 0xff0000, 1);
@@ -179,6 +183,9 @@ class Room1 extends Phaser.Scene{
             this.scene.pause('room1');
             this.scene.launch('clue1');
         })
+
+        pmenu = this.input.keyboard.addKey('P');
+        pmenu.on('down', () => this.scene.start('pause'));
     }
 }
 
@@ -219,6 +226,9 @@ class Room1Alt extends Phaser.Scene {
             this.add.text(1000, 900, "Something happened...").setFontSize(30);
             changed = true;
         })
+
+        pmenu = this.input.keyboard.addKey('P');
+        pmenu.on('down', () => this.scene.start('pause'));
     }
 }
 
@@ -227,6 +237,7 @@ class Room2 extends Phaser.Scene {
         super('room2');
     }
     create(){
+        paused = 2;
         this.cameras.main.fadeIn(1000,0,0,0);
         this.add.text(50, 50, "This will be the second level").setFontSize(30);
         this.rect1 = this.add.rectangle(300, 500, 50, 50, 0xff0000, 1);
@@ -239,6 +250,8 @@ class Room2 extends Phaser.Scene {
             })
         })
         this.add.text(1000, 50, "Pressing 'P' at any time will pause the game").setFontSize(30);
+        pmenu = this.input.keyboard.addKey('P');
+        pmenu.on('down', () => this.scene.start('pause'));
     }
 }
 
@@ -264,6 +277,8 @@ class Room2Alt extends Phaser.Scene {
         this.rect2.on('pointerdown', () => {
             this.scene.start('room3');
         })
+        pmenu = this.input.keyboard.addKey('P');
+        pmenu.on('down', () => this.scene.start('pause'));
     }
 }
 
@@ -272,6 +287,7 @@ class Room3 extends Phaser.Scene {
         super('room3');
     }
     create(){
+        paused = 3;
         let one = this.input.keyboard.addKey('A');
         let two = this.input.keyboard.addKey('H');
         let three = this.input.keyboard.addKey('I');
@@ -316,6 +332,8 @@ class Room3 extends Phaser.Scene {
             })
         })
         this.add.text(50,50, "This is the last and hardest level").setFontSize(30);
+        pmenu = this.input.keyboard.addKey('P');
+        pmenu.on('down', () => this.scene.start('pause'));
     }
 }
 
@@ -341,6 +359,8 @@ class Room3Alt extends Phaser.Scene {
             this.scene.pause('room3alt');
             this.scene.launch('clue2');
         })
+        pmenu = this.input.keyboard.addKey('P');
+        pmenu.on('down', () => this.scene.start('pause'));
     }
 }
 
@@ -363,7 +383,95 @@ class End extends Phaser.Scene {
         super('end');
     }
     create(){
+        this.cameras.main.fadeIn(1000,0,0,0);
+        this.text1 = this.add.text(400, 500, "This scene will have the closing cinematic").setFontSize(50);
+        
+        this.tweens.add({
+            targets: this.text1,
+            alpha:{from: 0, to: 1},
+            duration: 1000,
+            ease: 'Linear',
+        })
+        this.time.delayedCall(1000, () => {
+            this.text2 = this.add.text(450, 600, "As well as text exposition").setFontSize(50);
+            this.tweens.add({
+                targets: this.text2,
+                alpha: {from: 0, to: 1},
+                duration: 1000,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(1000, () => {
+                this.add.text(50, 50, "The end...").setFontSize(30);
+                this.input.on('pointerdown', () => {
+                    this.cameras.main.fadeOut(1000, 0, 0,0);
+                    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                        this.scene.start('menu');
+                    })
+                })
+            })
+        })
+    }
+}
 
+class Pause extends Phaser.Scene {
+    constructor(){
+        super('pause');
+    }
+    create(){
+        this.add.text(800, 50, "Game Paused").setFontSize(50);
+        this.cont = this.add.text(900, 500, "Continue").setFontSize(30);
+        this.cont.setInteractive();
+        this.check = this.add.text(900, 600, "Check Clues").setFontSize(30);
+        this.check.setInteractive();
+        this.options = this.add.text(900, 700, "Options").setFontSize(30);
+        this.options.setInteractive();
+        this.exit = this.add.test(900, 800, "Exit").setFontSize(30);
+        this.exit.setInteractive();
+
+        this.cont.on('pointerdown', () => {
+            if(paused == 1){
+                this.scene.start('room1');
+            }
+            if(paused == 2){
+                this.scene.start('room2');
+            }
+            if(paused == 3){
+                this.scene.start('room3');
+            }
+        })
+        this.check.on('pointerdown', () => {
+            this.scene.start('clues');
+        })
+        this.options.on('pointerdown', () => {
+            this.scene.start('options');
+        })
+        this.exit.on('pointerdown', () => {
+            this.scene.start('menu');
+        })
+    }
+}
+
+class Clues extends Phaser.Scene {
+    constructor(){
+        super('clues');
+    }
+    create(){
+        this.add.text(800, 500, "Clues will appear here").setFontSize(50);
+        this.input.on('pointerdown'){
+            this.scene.start('pause');
+        }
+    }
+}
+
+class Options extends Phaser.Scene {
+    constructor(){
+        super('options');
+    }
+    create(){
+        this.add.text(800, 500, "Options will go here").setFontSize(50);
+        this.input.on('pointerdown'){
+            this.scene.start('pause');
+        }
     }
 }
 
@@ -376,7 +484,7 @@ let config = {
         height: 1080
     },
     backgroundColor: '#301934',
-    scene: [ Menu, Scene1, Credits, Room1, Room1Alt, Clue1, Room2, Room2Alt, Room3, Room3Alt, Clue2, End],
+    scene: [ Menu, Scene1, Credits, Room1, Room1Alt, Clue1, Room2, Room2Alt, Room3, Room3Alt, Clue2, End, Pause, Clues, Options],
 }
 
 let game = new Phaser.Game(config);
