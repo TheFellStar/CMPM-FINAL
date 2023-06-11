@@ -16,22 +16,106 @@ class Level1 extends Phaser.Scene {
         this.load.image('player', 'player.png');
     }
     create(){
+        this.furniture = this.physics.add.group();
+
         this.bookshelf = this.add.image(1400, 150, 'bookshelf').setScale(.3);
+        this.furniture.add(this.bookshelf);
         this.diningTable = this.add.image(500, 300, 'table').setScale(.35);
+        this.furniture.add(this.diningTable);
         this.carpet = this.add.image(700, 600, 'carpet').setScale(.3);
+        this.furniture.add(this.carpet);
         this.table = this.add.image(500, 1000, 'table').setScale(.35);
+        this.furniture.add(this.table);
         this.sofa = this.add.image(900, 600, 'couch').setScale(.3);
+        this.furniture.add(this.sofa);
         this.sofa.angle = 90;
         this.tv = this.add.image(100, 600, 'tv').setScale(.3);
+        this.furniture.add(this.tv);
         this.chair = this.add.image(1150, 950, 'chair').setScale(.3);
+        this.furniture.add(this.chair);
         this.door = this.add.image(1800, 500, 'door').setScale(.3);
+        this.furniture.add(this.door);
         this.player = this.add.image(1400, 600, 'player').setScale(.3);
+        this.physics.add.existing(this.player);
+
+        cursors = this.input.keyboard.createCursorKeys();
+        interact = this.input.keyboard.addKey('X');
+        travel = this.input.keyboard.addKey('Z');
+
+        interact.on('down', () => {
+            if(this.physics.overlap(this.player, this.bookshelf)){
+
+            }else if(this.physics.overlap(this.player, this.diningTable)){
+
+            }else if(this.physics.overlap(this.player, this.chair)){
+
+            }
+        })
+
+        travel.on('down', () => {
+            this.cameras.main.fadeOut(1000, 0, 0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.start('level1alt');
+            })
+        })
+    }
+    update(){
+        if(cursors.up.isDown){
+            this.player.body.setVelocityY(-300);
+			this.player.body.setVelocityX(0);
+        }else if(cursors.down.isDown){
+            this.player.body.setVelocityY(300);
+			this.player.body.setVelocityX(0);
+        }else if(cursors.left.isDown) {
+			this.player.body.setVelocityX(-300);
+			this.player.body.setVelocityY(0);
+		} else if(cursors.right.isDown) {
+			this.player.body.setVelocityX(300);
+			this.player.body.setVelocityY(0);
+		} else {
+			this.player.body.setVelocityX(0);
+			this.player.body.setVelocityY(0);
+        }
+
+        if(this.physics.overlap(this.player, this.bookshelf)){
+
+        }else if(this.physics.overlap(this.player, this.diningTable)){
+
+        }else if(this.physics.overlap(this.player, this.chair)){
+
+        }else if(this.physics.overlap(this.player, this.tv)){
+
+        }else if(this.physics.overlap(this.player, this.door)){
+
+        }else if(this.physics.overlap(this.player, this.carpet)){
+
+        }else if(this.physics.overlap(this.player, this.table)){
+
+        }else if(this.physics.overlap(this.player, this.sofa)){
+
+        }
     }
 }
 
 class Level1Alt extends Phaser.Scene {
     constructor(){
         super('level1alt');
+    }
+    create(){
+        travel = this.input.keyboard.addKey('Z');
+
+        travel.on('down', () => {
+            this.cameras.main.fadeOut(1000, 0, 0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.start('level1alt');
+            })
+        })
+    }
+}
+
+class Pickup extends Phaser.Scene{
+    constructor(){
+        super('pickup');
     }
     create(){
 
@@ -106,7 +190,10 @@ let config = {
         default: "arcade",
     },
     backgroundColor: '#301934',
-    scene: [ Level1, Level1Alt, Pause, Clues, Options],
+    scene: [ Level1, Level1Alt, Pause, Clues, Options, Pickup],
 }
 
 let game = new Phaser.Game(config);
+let cursors = null;
+let interact = null;
+let travel = null;
