@@ -43,7 +43,7 @@ class Menu extends Phaser.Scene{
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('time', 'time_turning_TEMP.png');
+        this.load.image('time', 'time_turning_TEMP.gif');
         this.load.image('paper', 'paper_TEMP.png');
         this.load.image('clock', 'clock_TEMP.png');
     }
@@ -74,7 +74,6 @@ class Menu extends Phaser.Scene{
         this.paper = this.add. image(1700, 950, 'paper').setScale(0.3);
         this.paper.flipX = true;
         this.paper.angle = 350
-
 
         this.tweens.add({
             targets: this.title,
@@ -115,35 +114,63 @@ class Menu extends Phaser.Scene{
             })
         })
 
+        this.c1 = this.add.image(-500, 0, 'time').setScale(.2);
+
         this.start.on('pointerover', () =>{
+            this.c1.destroy();
+            this.c1 = this.add.image(250, 525, 'time').setScale(.1);
             this.resume.setColor('#ffffff');
-            this.start.setColor('#0000ff');
+            this.start.setColor('#86c5da');
             this.options.setColor('#ffffff');
             this.exit.setColor('#ffffff');
         })
         this.resume.on('pointerover', () => {
-            this.resume.setColor('#0000ff');
+            this.c1.destroy();
+            this.c1 = this.add.image(325, 600, 'time').setScale(.1);
+            this.resume.setColor('#86c5da');
             this.start.setColor('#ffffff');
             this.options.setColor('#ffffff');
             this.exit.setColor('#ffffff');
         })
         this.options.on('pointerover', () => {
+            this.c1.destroy();
+            this.c1 = this.add.image(400, 675, 'time').setScale(.1);
             this.resume.setColor('#ffffff');
             this.start.setColor('#ffffff');
-            this.options.setColor('#0000ff');
+            this.options.setColor('#86c5da');
             this.exit.setColor('#ffffff');
         })
         this.exit.on('pointerover', () => {
+            this.c1.destroy();
+            this.c1 = this.add.image(475, 750, 'time').setScale(.1);
             this.resume.setColor('#ffffff');
             this.start.setColor('#ffffff');
             this.options.setColor('#ffffff');
-            this.exit.setColor('#0000ff');
+            this.exit.setColor('#86c5da');
         })
         this.start.on('pointerdown', () => {
-            this.cameras.main.fadeOut(1000,0,0,0);
-            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
-                this.scene.start('scene1');
-            })
+            this.c2 = this.add.image(-960, 540, 'time').setScale(2);
+            const timeline = this.add.timeline([
+                {
+                    at: 0,
+                    tween: {
+                        targets: this.c2,
+                        x: 2880,
+                        duration: 2000
+                    }
+                },
+                {
+                    at: 1000,
+                    run: () => {
+                        this.cameras.main.fadeOut(1000,0,0,0);
+                        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                            this.scene.start('scene1');
+                        })
+                    }
+                }
+            ]);
+            
+            timeline.play();
         })
     }
 }
