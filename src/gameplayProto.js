@@ -101,6 +101,18 @@ class Level1Alt extends Phaser.Scene {
     constructor(){
         super('level1alt');
     }
+    preload(){
+        this.load.path = './assets/';
+        this.load.image('bed', 'bed_past.png');
+        this.load.image('bookshelf', 'bookshelf_past.png');
+        this.load.image('carpet', 'carpet_past.png');
+        this.load.image('chair', 'chair_past.png');
+        this.load.image('door', 'door_past.png');
+        this.load.image('sofa', 'sofa_past.png');
+        this.load.image('table', 'table_past.png');
+        this.load.image('tv', 'tv_past.png');
+        this.load.image('player', 'player.png');
+    }
     create(){
         travel = this.input.keyboard.addKey('Z');
 
