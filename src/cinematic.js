@@ -117,9 +117,15 @@ class Scene1 extends Phaser.Scene {
     }
     create(){
         this.cameras.main.fadeIn(1000,0,0,0);
-        this.label = this.add.text(100, 200, '').setFontSize(50);
-        this.typewriteText('Sometime in the not so distant present,\n\nyou find yourself in the midst of a large mansion');   
-
+        this.label = this.add.text(100, 200, '').setFontSize(40);
+        this.typewriteText('You got the call late at night, some owner of a mansion has gone missing.\n\nThe normal investigator found no trail or trace of his wearabouts...\n\nLooks like it is up to you, the Time Investigation Agency to figure out\n\nwhat happened.');   
+        
+        this.input.on('pointerdown', () => {
+            this.cameras.main.fadeOut(1000,0,0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.start('logo');
+            })
+        })
     }
     typewriteText(text){
         const length = text.length
@@ -130,7 +136,7 @@ class Scene1 extends Phaser.Scene {
                 ++i
             },
             repeat: length - 1,
-            delay: 200
+            delay: 100
         })
     }
 }
