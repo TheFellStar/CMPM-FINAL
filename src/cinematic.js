@@ -6,9 +6,10 @@ class Logo extends Phaser.Scene{
 
     }
     create(){
+        this.cameras.main.fadeIn(1000,0,0,0);
         this.add.text(800, 500, "Logo goes here").setFontSize(50);
 
-        this.time.delayedCall(1000, () => {
+        this.time.delayedCall(2000, () => {
             this.cameras.main.fadeOut(1000,0,0,0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.scene.start('menu')
@@ -115,21 +116,25 @@ class Scene1 extends Phaser.Scene {
 
     }
     create(){
+        this.cameras.main.fadeIn(1000,0,0,0);
+        this.label = this.add.text(100, 200, '').setFontSize(50);
+        this.typewriteText('Sometime in the not so distant present,\n\nyou find yourself in the midst of a large mansion');   
 
+    }
+    typewriteText(text){
+        const length = text.length
+        let i = 0
+        this.time.addEvent({
+            callback: () => {
+                this.label.text += text[i]
+                ++i
+            },
+            repeat: length - 1,
+            delay: 200
+        })
     }
 }
 
-class Scene2 extends Phaser.Scene {
-    constructor(){
-        super('scene2');
-    }
-    preload(){
-
-    }
-    create(){
-
-    }
-}
 
 let config = {
     type: Phaser.AUTO,
@@ -140,7 +145,7 @@ let config = {
         height: 1080
     },
     backgroundColor: '#301934',
-    scene: [ Logo, Menu, Scene1, Scene2],
+    scene: [ Logo, Menu, Scene1],
 }
 
 let game = new Phaser.Game(config);
