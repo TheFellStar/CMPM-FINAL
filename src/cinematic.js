@@ -44,6 +44,8 @@ class Menu extends Phaser.Scene{
     preload(){
         this.load.path = './assets/';
         this.load.image('time', 'time_turning_TEMP.png');
+        this.load.image('paper', 'paper_TEMP.png');
+        this.load.image('clock', 'clock_TEMP.png');
     }
     create(){
         this.title = this.add.text(-500, 50, "Tale of Time").setFontSize(100);
@@ -55,6 +57,24 @@ class Menu extends Phaser.Scene{
         this.options.setInteractive();
         this.exit = this.add.text(-525, 725, "Exit").setFontSize(50);
         this.exit.setInteractive();
+
+        this.clock = this.add.image(1500, 700, 'clock').setScale(1);
+        this.clock.setOrigin(0.5, 0.5);
+        this.clock.angle = 25;
+        this.paper = this.add.image(1825, 300, 'paper').setScale(0.3);
+        this.paper.setOrigin(0.5,0.5);
+        this.paper.angle = 300;
+        this.paper = this.add.image(1300, 250, 'paper').setScale(0.3);
+        this.paper.angle = 270;
+        this.add.image(1100, 400, 'paper').setScale(0.3);
+        this.paper = this.add.image(1600, 700, 'paper').setScale(0.3);
+        this.paper.angle = 25;
+        this.paper = this.add.image(1100, 750, 'paper').setScale(0.3);
+        this.paper.flipX = true;
+        this.paper = this.add. image(1700, 950, 'paper').setScale(0.3);
+        this.paper.flipX = true;
+        this.paper.angle = 350
+
 
         this.tweens.add({
             targets: this.title,
