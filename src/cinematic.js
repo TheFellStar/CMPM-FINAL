@@ -7,21 +7,33 @@ class Logo extends Phaser.Scene{
         this.load.image('logo', 'studio_logo_TEMP.png');
     }
     create(){
-        this.cameras.main.fadeIn(1000,0,0,0);
         this.logo = this.add.image(1000, 500, 'logo').setScale(.25);
         this.logo.setOrigin(0.5,0.5);
-        this.tweens.add({
-            targets: this.logo,
-            rotation: 6.28318531,
-            duration: 2000
-        });
-
-        this.time.delayedCall(2000, () => {
-            this.cameras.main.fadeOut(1000,0,0,0);
-            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-                this.scene.start('menu')
-            })
-        })
+        const timeline = this.add.timeline([
+            {
+                at: 0,
+                run: () => {this.cameras.main.fadeIn(1000,0,0,0);}
+            },
+            {
+                at: 500,
+                tween: {
+                    targets: this.logo,
+                    rotation: 6.28318531,
+                    duration: 2000
+                }
+            },
+            {
+                at: 2500,
+                run: () => {
+                    this.cameras.main.fadeOut(1000,0,0,0);
+                    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+                        this.scene.start('menu')
+                    })
+                }
+            }
+        ]);
+        
+        timeline.play();
     }
 }
 
