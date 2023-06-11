@@ -3,11 +3,18 @@ class Logo extends Phaser.Scene{
         super('logo');
     }
     preload(){
-
+        this.load.path = './assets/';
+        this.load.image('logo', 'studio_logo_TEMP.png');
     }
     create(){
         this.cameras.main.fadeIn(1000,0,0,0);
-        this.add.text(800, 500, "Logo goes here").setFontSize(50);
+        this.logo = this.add.image(1000, 500, 'logo').setScale(.25);
+        this.logo.setOrigin(0.5,0.5);
+        this.tweens.add({
+            targets: this.logo,
+            rotation: 6.28318531,
+            duration: 2000
+        });
 
         this.time.delayedCall(2000, () => {
             this.cameras.main.fadeOut(1000,0,0,0);
@@ -23,7 +30,8 @@ class Menu extends Phaser.Scene{
         super('menu');
     }
     preload(){
-
+        this.load.path = './assets/';
+        this.load.image('time', 'time_turning_TEMP.png');
     }
     create(){
         this.title = this.add.text(-500, 50, "Tale of Time").setFontSize(100);
