@@ -26,7 +26,7 @@ class Menu extends Phaser.Scene{
 
     }
     create(){
-        this.title = this.add.text(-500, 50, "Game Title").setFontSize(100);
+        this.title = this.add.text(-500, 50, "Tale of Time").setFontSize(100);
         this.start = this.add.text(-300, 500, "Start", {color: '#ffffff'}).setFontSize(50);
         this.start.setInteractive();
         this.resume = this.add.text(-375, 575, "Resume").setFontSize(50);
