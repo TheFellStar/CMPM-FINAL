@@ -46,8 +46,17 @@ class Menu extends Phaser.Scene{
         this.load.image('time', 'time_turning_TEMP.gif');
         this.load.image('paper', 'paper_TEMP.png');
         this.load.image('clock', 'clock_TEMP.png');
+        this.load.audio('background', 'Serge Quadrado - Suspense Piano.mp3');
     }
     create(){
+        backgroundMusic = this.sound.add('background');
+        backgroundMusic.loop = true;
+
+        if(playing == false){
+            backgroundMusic.play();
+            playing = true;
+        }
+
         this.title = this.add.text(-500, 50, "Tale of Time").setFontSize(100);
         this.start = this.add.text(-300, 500, "Start", {color: '#ffffff'}).setFontSize(50);
         this.start.setInteractive();
@@ -271,10 +280,14 @@ class Options extends Phaser.Scene {
                 mopp = true;
                 this.music.setColor("#00ff00");
                 this.music.setText("On");
+                playing = true;
+                backgroundMusic.play();
             }else{
                 mopp = false;
                 this.music.setColor("#ff0000");
                 this.music.setText("Off");
+                playing = false;
+                backgroundMusic.stop();
             }
         })
 

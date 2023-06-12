@@ -24,3 +24,4 @@ let paused = 0;
 let playing = false;
 let mopp = true;
 let full = false;
+let backgroundMusic;

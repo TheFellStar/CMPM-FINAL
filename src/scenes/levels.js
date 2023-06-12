@@ -14,13 +14,12 @@ class Level1 extends Phaser.Scene {
         this.load.image('tv', 'tv_present.png');
         this.load.image('table', 'table_present.png');
         this.load.image('player', 'player.png');
-        this.load.audio('background', 'Serge Quadrado - Suspense Piano.mp3')
     }
     create(){
-        let backgroundMusic = this.sound.add('background');
-        backgroundMusic.loop = true;
+        
         if(playing == false){
             backgroundMusic.play();
+            playing = true;
         }
         
         this.add.text(50,50, "Press 'X' to interact with objects").setFontSize(30);
