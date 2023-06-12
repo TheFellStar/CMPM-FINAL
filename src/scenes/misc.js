@@ -95,3 +95,20 @@ class Pickup extends Phaser.Scene{
         }
     }
 }
+
+class TimeTravel extends Phaser.Scene {
+    constructor(){
+        super('timetravel');
+    }
+    preload(){
+        this.load.path = './assets/';
+        this.load.image('tunnelclock', 'textures/Clock.jpg');
+        this.load.image('metal', 'textures/alien-metal.jpg');
+        this.load.image('test', 'textures/test.png');
+        this.load.glsl('bundle', 'bundle.glsl.js');
+    }
+    create(){
+
+        const shader = this.add.shader('Tunnel', 960, 540, 1920, 1080, [ 'test' ]);
+    }
+}

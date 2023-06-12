@@ -81,7 +81,7 @@ class Level1 extends Phaser.Scene {
         travel.on('down', () => {
             this.cameras.main.fadeOut(1000, 0, 0,0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
-                this.scene.start('level1alt');
+                this.scene.start('timetravel');
             })
         })
 

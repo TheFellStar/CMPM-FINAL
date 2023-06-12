@@ -10,7 +10,7 @@ let config = {
         default: "arcade",
     },
     backgroundColor: '#301934',
-    scene: [ Logo, Menu, Intro, Level1, Level1Alt, Pause, Clues, Options, Credits, Pickup],
+    scene: [ Logo, Menu, Intro, Level1, Level1Alt, Pause, Clues, Options, Credits, Pickup, TimeTravel],
 }
 
 let game = new Phaser.Game(config);
