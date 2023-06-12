@@ -4,7 +4,7 @@ class Menu extends Phaser.Scene{
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('time', 'time_turning_TEMP.gif');
+        this.load.image('time', 'Clock.jpg');
         this.load.image('paper', 'paper_TEMP.png');
         this.load.image('clock', 'clock_TEMP.png');
         this.load.audio('background', 'Serge Quadrado - Suspense Piano.mp3');
