@@ -1,42 +1,3 @@
-class Logo extends Phaser.Scene{
-    constructor() {
-        super('logo');
-    }
-    preload(){
-        this.load.path = './assets/';
-        this.load.image('logo', 'studio_logo_TEMP.png');
-    }
-    create(){
-        this.logo = this.add.image(1000, 500, 'logo').setScale(.25);
-        this.logo.setOrigin(0.5,0.5);
-        const timeline = this.add.timeline([
-            {
-                at: 0,
-                run: () => {this.cameras.main.fadeIn(1000,0,0,0);}
-            },
-            {
-                at: 500,
-                tween: {
-                    targets: this.logo,
-                    rotation: 6.28318531,
-                    duration: 2000
-                }
-            },
-            {
-                at: 2500,
-                run: () => {
-                    this.cameras.main.fadeOut(1000,0,0,0);
-                    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-                        this.scene.start('menu')
-                    })
-                }
-            }
-        ]);
-        
-        timeline.play();
-    }
-}
-
 class Menu extends Phaser.Scene{
     constructor(){
         super('menu');
@@ -49,6 +10,7 @@ class Menu extends Phaser.Scene{
         this.load.audio('background', 'Serge Quadrado - Suspense Piano.mp3');
     }
     create(){
+        let interact = true;
         backgroundMusic = this.sound.add('background');
         backgroundMusic.loop = true;
 
@@ -125,69 +87,85 @@ class Menu extends Phaser.Scene{
 
         this.c1 = this.add.image(-500, 0, 'time').setScale(.2);
 
+
         this.start.on('pointerover', () =>{
-            this.c1.destroy();
-            this.c1 = this.add.image(250, 525, 'time').setScale(.1);
-            this.resume.setColor('#ffffff');
-            this.start.setColor('#86c5da');
-            this.options.setColor('#ffffff');
-            this.credits.setColor('#ffffff');
+            if(interact == true){
+                this.c1.destroy();
+                this.c1 = this.add.image(250, 525, 'time').setScale(.1);
+                this.resume.setColor('#ffffff');
+                this.start.setColor('#86c5da');
+                this.options.setColor('#ffffff');
+                this.credits.setColor('#ffffff');
+            }
         })
         this.resume.on('pointerover', () => {
-            this.c1.destroy();
-            this.c1 = this.add.image(325, 600, 'time').setScale(.1);
-            this.resume.setColor('#86c5da');
-            this.start.setColor('#ffffff');
-            this.options.setColor('#ffffff');
-            this.credits.setColor('#ffffff');
+            if(interact == true){
+                this.c1.destroy();
+                this.c1 = this.add.image(325, 600, 'time').setScale(.1);
+                this.resume.setColor('#86c5da');
+                this.start.setColor('#ffffff');
+                this.options.setColor('#ffffff');
+                this.credits.setColor('#ffffff');
+            }
         })
         this.options.on('pointerover', () => {
-            this.c1.destroy();
-            this.c1 = this.add.image(400, 675, 'time').setScale(.1);
-            this.resume.setColor('#ffffff');
-            this.start.setColor('#ffffff');
-            this.options.setColor('#86c5da');
-            this.credits.setColor('#ffffff');
+            if(interact == true){
+                this.c1.destroy();
+                this.c1 = this.add.image(400, 675, 'time').setScale(.1);
+                this.resume.setColor('#ffffff');
+                this.start.setColor('#ffffff');
+                this.options.setColor('#86c5da');
+                this.credits.setColor('#ffffff');
+            }
         })
         this.credits.on('pointerover', () => {
-            this.c1.destroy();
-            this.c1 = this.add.image(475, 750, 'time').setScale(.1);
-            this.resume.setColor('#ffffff');
-            this.start.setColor('#ffffff');
-            this.options.setColor('#ffffff');
-            this.credits.setColor('#86c5da');
+            if(interact == true){
+                this.c1.destroy();
+                this.c1 = this.add.image(475, 750, 'time').setScale(.1);
+                this.resume.setColor('#ffffff');
+                this.start.setColor('#ffffff');
+                this.options.setColor('#ffffff');
+                this.credits.setColor('#86c5da');
+            }
         })
 
         this.credits.on('pointerdown', () => {
-            this.scene.start('credits');
+            if(interact == true){
+                this.scene.start('credits');
+            }
         })
         this.options.on('pointerdown', () => {
-            level = 0;
-            this.scene.start('options');
+            if(interact == true){
+                level = 0;
+                this.scene.start('options');
+            }
         })
         this.start.on('pointerdown', () => {
-            this.c2 = this.add.image(-960, 540, 'time').setScale(2);
-            const timeline = this.add.timeline([
-                {
-                    at: 0,
-                    tween: {
-                        targets: this.c2,
-                        x: 2880,
-                        duration: 2000
+            if(interact == true){
+                interact = false;
+                this.c2 = this.add.image(-960, 540, 'time').setScale(2);
+                const timeline = this.add.timeline([
+                    {
+                        at: 0,
+                        tween: {
+                            targets: this.c2,
+                            x: 2880,
+                            duration: 2000
+                        }
+                    },
+                    {
+                        at: 1000,
+                        run: () => {
+                            this.cameras.main.fadeOut(1000,0,0,0);
+                            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                                this.scene.start('intro');
+                            })
+                        }
                     }
-                },
-                {
-                    at: 1000,
-                    run: () => {
-                        this.cameras.main.fadeOut(1000,0,0,0);
-                        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
-                            this.scene.start('intro');
-                        })
-                    }
-                }
-            ]);
-            
-            timeline.play();
+                ]);
+                
+                timeline.play();
+            }
         })
     }
 }
