@@ -108,7 +108,18 @@ class TimeTravel extends Phaser.Scene {
         this.load.glsl('bundle', 'bundle.glsl.js');
     }
     create(){
-
+        this.cameras.main.fadeIn(1000,0,0,0);
         const shader = this.add.shader('Tunnel', 960, 540, 1920, 1080, [ 'test' ]);
+        this.time.delayedCall(3000, () => {
+            this.cameras.main.fadeOut(1000,0,0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                if(level == 1){
+                    this.scene.start('level1alt');
+                }
+                if(level == 2){
+                    this.scene.start('level1');
+                }
+            })
+        })
     }
 }

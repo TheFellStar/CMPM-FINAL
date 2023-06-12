@@ -86,7 +86,7 @@ class Level1 extends Phaser.Scene {
         })
 
         pmenu = this.input.keyboard.addKey('P');
-        paused = 1;
+        level = 1;
         pmenu.on('down', () => this.scene.start('pause'));
     }
     update(){
@@ -198,12 +198,12 @@ class Level1Alt extends Phaser.Scene {
         travel.on('down', () => {
             this.cameras.main.fadeOut(1000, 0, 0,0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
-                this.scene.start('level1');
+                this.scene.start('timetravel');
             })
         })
 
         pmenu = this.input.keyboard.addKey('P');
-        paused = 2;
+        level = 2;
         pmenu.on('down', () => this.scene.start('pause'));
     }
     update(){

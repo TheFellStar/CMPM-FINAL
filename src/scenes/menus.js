@@ -162,7 +162,7 @@ class Menu extends Phaser.Scene{
             this.scene.start('credits');
         })
         this.options.on('pointerdown', () => {
-            pmenu = 0;
+            level = 0;
             this.scene.start('options');
         })
         this.start.on('pointerdown', () => {
@@ -208,10 +208,10 @@ class Pause extends Phaser.Scene {
         this.exit.setInteractive();
 
         this.cont.on('pointerdown', () => {
-            if(paused == 1){
+            if(level == 1){
                 this.scene.start('level1');
             }
-            if(paused == 2){
+            if(level == 2){
                 this.scene.start('level1alt');
             }
         })
@@ -293,7 +293,7 @@ class Options extends Phaser.Scene {
             }
         })
 
-        if(pmenu == 0){
+        if(level == 0){
             this.back.on('pointerdown', () => {
                 this.scene.start('menu');
             })
