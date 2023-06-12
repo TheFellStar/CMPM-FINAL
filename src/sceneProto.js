@@ -1,3 +1,5 @@
+//THIS IS A PROTOTYPE DONT TOUCH
+
 let pmenu;
 let paused = 0;
 

@@ -1,3 +1,5 @@
+//THIS IS A PROTOTYPE, DONT TOUCH IT
+
 class Logo extends Phaser.Scene{
     constructor() {
         super('logo');
