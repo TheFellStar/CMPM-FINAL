@@ -232,13 +232,58 @@ class Options extends Phaser.Scene {
         super('options');
     }
     create(){
-        this.add.text(800, 500, "Options will go here").setFontSize(50);
+        this.add.text(750, 100, "Options").setFontSize(100);
+        this.add.text(750, 300, "Music").setFontSize(50);
+        this.add.text(750, 500, "Fullscreen").setFontSize(50);
+        this.back = this.add.text(750, 900, "Back").setFontSize(50);
+        this.back.setInteractive();
+
+        this.fullscreen = this.add.text(1100, 500, "Off").setFontSize(50);
+        if(full == false){
+            this.fullscreen.setColor("#ff0000");
+        }else{
+            this.fullscreen.setColor("#00ff00");
+        }
+        this.fullscreen.setInteractive();
+        this.fullscreen.on('pointerdown', () => {
+            if(full == false){
+                full = true;
+                this.fullscreen.setColor("#00ff00");
+                this.fullscreen.setText("On");
+                this.scale.startFullscreen();
+            }else{
+                full = false;
+                this.fullscreen.setColor("#ff0000");
+                this.fullscreen.setText("Off");
+                this.scale.stopFullscreen();
+            }
+        })
+
+        this.music = this.add.text(1100, 300, "On").setFontSize(50);
+        if(mopp == false){
+            this.music.setColor("#ff0000");
+        }else{
+            this.music.setColor("#00ff00");
+        }
+        this.music.setInteractive();
+        this.music.on('pointerdown', () => {
+            if(mopp == false){
+                mopp = true;
+                this.music.setColor("#00ff00");
+                this.music.setText("On");
+            }else{
+                mopp = false;
+                this.music.setColor("#ff0000");
+                this.music.setText("Off");
+            }
+        })
+
         if(pmenu == 0){
-            this.input.on('pointerdown', () => {
+            this.back.on('pointerdown', () => {
                 this.scene.start('menu');
             })
         }else{
-            this.input.on('pointerdown', () => {
+            this.back.on('pointerdown', () => {
                 this.scene.start('pause');
             })
         }

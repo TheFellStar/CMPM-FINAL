@@ -22,3 +22,5 @@ let display = 0;
 let pmenu = null;
 let paused = 0;
 let playing = false;
+let mopp = true;
+let full = false;
