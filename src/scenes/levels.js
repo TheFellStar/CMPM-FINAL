@@ -17,7 +17,7 @@ class Level1 extends Phaser.Scene {
     }
     create(){
         
-        if(playing == false){
+        if(playing == false && mopp == true){
             backgroundMusic.play();
             playing = true;
         }

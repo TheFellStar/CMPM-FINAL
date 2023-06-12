@@ -52,7 +52,7 @@ class Menu extends Phaser.Scene{
         backgroundMusic = this.sound.add('background');
         backgroundMusic.loop = true;
 
-        if(playing == false){
+        if(playing == false && mopp == true){
             backgroundMusic.play();
             playing = true;
         }
@@ -246,11 +246,12 @@ class Options extends Phaser.Scene {
         this.add.text(750, 500, "Fullscreen").setFontSize(50);
         this.back = this.add.text(750, 900, "Back").setFontSize(50);
         this.back.setInteractive();
-
-        this.fullscreen = this.add.text(1100, 500, "Off").setFontSize(50);
+        
         if(full == false){
+            this.fullscreen = this.add.text(1100, 500, "Off").setFontSize(50);
             this.fullscreen.setColor("#ff0000");
         }else{
+            this.fullscreen = this.add.text(1100, 500, "On").setFontSize(50);
             this.fullscreen.setColor("#00ff00");
         }
         this.fullscreen.setInteractive();
@@ -268,10 +269,11 @@ class Options extends Phaser.Scene {
             }
         })
 
-        this.music = this.add.text(1100, 300, "On").setFontSize(50);
         if(mopp == false){
+            this.music = this.add.text(1100, 300, "Off").setFontSize(50);
             this.music.setColor("#ff0000");
         }else{
+            this.music = this.add.text(1100, 300, "On").setFontSize(50);
             this.music.setColor("#00ff00");
         }
         this.music.setInteractive();
