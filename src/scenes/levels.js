@@ -53,9 +53,6 @@ class Level1 extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue1")==-1){
-                    clueArr.push("clue1");
-                }
                 display = 1;
                 this.scene.pause('level1');
                 this.scene.launch('pickup');
@@ -70,9 +67,6 @@ class Level1 extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue2")==-1){
-                    clueArr.push("clue2");
-                }
                 display = 2;
                 this.scene.pause('level1');
                 this.scene.launch('pickup');
@@ -123,9 +117,6 @@ class Level1 extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue3")==-1){
-                    clueArr.push("clue3");
-                }
                 display = 3;
                 this.scene.pause('level1');
                 this.scene.launch('pickup');
@@ -240,9 +231,6 @@ class Level1Alt extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue4")==-1){
-                    clueArr.push("clue4");
-                }
                 display = 4;
                 this.scene.pause('level1alt');
                 this.scene.launch('pickup');
@@ -257,9 +245,6 @@ class Level1Alt extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue5")==-1){
-                    clueArr.push("clue5");
-                }
                 display = 5;
                 this.scene.pause('level1alt');
                 this.scene.launch('pickup');
@@ -399,14 +384,6 @@ class Level2 extends Phaser.Scene {
                 duration: 500,
                 ease: 'Linear',
             })
-            this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue1")==-1){
-                    clueArr.push("clue1");
-                }
-                display = 1;
-                this.scene.pause('level1');
-                this.scene.launch('pickup');
-            })
         })
         this.diningTable.on('pointerdown', () => {
             this.tweens.add({
@@ -417,11 +394,8 @@ class Level2 extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue2")==-1){
-                    clueArr.push("clue2");
-                }
-                display = 2;
-                this.scene.pause('level1');
+                display = 9;
+                this.scene.pause('level2');
                 this.scene.launch('pickup');
             })
         })
@@ -451,6 +425,11 @@ class Level2 extends Phaser.Scene {
                 duration: 500,
                 ease: 'Linear',
             })
+            this.time.delayedCall(500, () => {
+                display = 8;
+                this.scene.pause('level2');
+                this.scene.launch('pickup');
+            })
         })
         this.tv.on('pointerdown', () => {
             this.tweens.add({
@@ -469,14 +448,6 @@ class Level2 extends Phaser.Scene {
                 duration: 500,
                 ease: 'Linear',
             })
-            this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue3")==-1){
-                    clueArr.push("clue3");
-                }
-                display = 3;
-                this.scene.pause('level1');
-                this.scene.launch('pickup');
-            })
         })
 
         this.door.on('pointerdown', () => {
@@ -488,17 +459,14 @@ class Level2 extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(lock == false){
-                    this.doorText = this.add.text(50, 50, "The lock is rusted shut, can't get it open...").setFontSize(30);
-                    this.tweens.add({
-                        targets: this.doorText,
-                        alpha: {from: 1, to: 0},
-                        duration: 2000,
-                        ease: 'Linear',
-                    })
-                }else{
-                    this.scene.start('level2');
-                }
+                this.doorText.destroy();
+                this.doorText = this.add.text(50, 50, "The lock is rusted shut, can't get it open...").setFontSize(30);
+                this.tweens.add({
+                    targets: this.doorText,
+                    alpha: {from: 1, to: 0},
+                    duration: 2000,
+                    ease: 'Linear',
+                })
             })
         })
 
@@ -562,11 +530,8 @@ class Level2Future extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue1")==-1){
-                    clueArr.push("clue1");
-                }
-                display = 1;
-                this.scene.pause('level1');
+                display = 6;
+                this.scene.pause('level2future');
                 this.scene.launch('pickup');
             })
         })
@@ -577,14 +542,6 @@ class Level2Future extends Phaser.Scene {
                 y: this.diningTable.y,
                 duration: 500,
                 ease: 'Linear',
-            })
-            this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue2")==-1){
-                    clueArr.push("clue2");
-                }
-                display = 2;
-                this.scene.pause('level1');
-                this.scene.launch('pickup');
             })
         })
         this.table.on('pointerdown', () => {
@@ -613,6 +570,11 @@ class Level2Future extends Phaser.Scene {
                 duration: 500,
                 ease: 'Linear',
             })
+            this.time.delayedCall(500, () => {
+                display = 7;
+                this.scene.pause('level2future');
+                this.scene.launch('pickup');
+            })
         })
         this.tv.on('pointerdown', () => {
             this.tweens.add({
@@ -630,14 +592,6 @@ class Level2Future extends Phaser.Scene {
                 y: this.chair.y,
                 duration: 500,
                 ease: 'Linear',
-            })
-            this.time.delayedCall(500, () => {
-                if(clueArr.indexOf("clue3")==-1){
-                    clueArr.push("clue3");
-                }
-                display = 3;
-                this.scene.pause('level1');
-                this.scene.launch('pickup');
             })
         })
 
@@ -669,6 +623,30 @@ class Level2Future extends Phaser.Scene {
 class Level3 extends Phaser.Scene {
     constructor(){
         super('level3');
+    }
+    preload(){
+
+    }
+    create(){
+        this.doorText = this.add.text(50, 50, "The door unlocked, but here we are again.... this can't be right").setFontSize(30);
+    }
+}
+
+class Level3Future extends Phaser.Scene {
+    constructor(){
+        super('level3future');
+    }
+    preload(){
+
+    }
+    create(){
+
+    }
+}
+
+class Level3Past extends Phaser.Scene{
+    constructor(){
+        super('level3past');
     }
     preload(){
 

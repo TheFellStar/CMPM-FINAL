@@ -7,11 +7,10 @@ let config = {
         height: 1080
     },
     backgroundColor: '#301934',
-    scene: [ Logo, Menu, Intro, Level1, Level1Alt, Level2, Level2Future, Level3, Pause, Clues, Options, Credits, Pickup, TimeTravel, FutureLock],
+    scene: [ Logo, Menu, Intro, Level1, Level1Alt, Level2, Level2Future, Level3, Level3Future, Level3Past, Pause, Options, Credits, Pickup, TimeTravel, FutureLock],
 }
 
 let game = new Phaser.Game(config);
-let clueArr = [];
 let display = 0;
 let pmenu = null;
 let playing = false;

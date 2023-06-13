@@ -193,23 +193,8 @@ class Pause extends Phaser.Scene {
                 this.scene.start('level1alt');
             }
         })
-        this.check.on('pointerdown', () => {
-            this.scene.start('clues');
-        })
         this.options.on('pointerdown', () => {
             this.scene.start('options');
-        })
-    }
-}
-
-class Clues extends Phaser.Scene {
-    constructor(){
-        super('clues');
-    }
-    create(){
-        this.add.text(800, 500, "Clues will appear here").setFontSize(50);
-        this.input.on('pointerdown', () => {
-            this.scene.start('pause');
         })
     }
 }

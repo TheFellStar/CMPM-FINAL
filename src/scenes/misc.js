@@ -79,6 +79,9 @@ class Pickup extends Phaser.Scene{
         this.load.image('contacts', 'contacts_list.png');
         this.load.image('diary', 'diary_past.png');
         this.load.image('notecard', 'notecard.png');
+        this.load.image('futureDiary', 'diary_future.png');
+        this.load.image('letter', 'letter.png');
+        this.load.image('shopping', 'shopping_list.png');
         this.load.audio('paper', 'paper sound.mp3');
     }
     create(){
@@ -125,11 +128,35 @@ class Pickup extends Phaser.Scene{
             })
         }
         if(display == 6){
-            this.add.image(1000, 500, 'diary').setScale(1);
-            this.add.text(700, 500, "Door", {color: "#000000"}).setFontSize(50);
+            this.add.image(1000, 500, 'letter').setScale(1);
+            this.add.text(720, 400, "This place is great, this is\n\nthe Third time I've lived\n\nthis day", {color: "#ff00ff"}).setFontSize(30);
             this.input.on('pointerdown', () => {
                 this.scene.stop('pickup');
-                this.scene.resume('level1alt');
+                this.scene.resume('level2future');
+            })
+        }
+        if(display == 7){
+            this.add.image(1000, 500, 'shopping').setScale(1);
+            this.add.text(650, 400, "I finally did it! I'm finally here.\n\nNow what's the First thing I should do", {color: "#0000ff"}).setFontSize(30);
+            this.input.on('pointerdown', () => {
+                this.scene.stop('pickup');
+                this.scene.resume('level2future');
+            })
+        }
+        if(display == 8){
+            this.add.image(1000, 500, 'shopping').setScale(1);
+            this.add.text(650, 400, "I don't understand, I shouldn't be here.\n\nI shut the machine off when I was in\n\nthe future. Why am I living this\n\nhellish present for the Second time?", {color: "#ffff00"}).setFontSize(30);
+            this.input.on('pointerdown', () => {
+                this.scene.stop('pickup');
+                this.scene.resume('level2');
+            })
+        }
+        if(display == 9){
+            this.add.image(1000, 500, 'diary').setScale(1);
+            this.add.text(700, 400, "I've been cleaning this place for\n\nFour days now.\n\nThis place feels familiar, why am I\n\nin my old home?", {color: "#00ffff"}).setFontSize(30);
+            this.input.on('pointerdown', () => {
+                this.scene.stop('pickup');
+                this.scene.resume('level2');
             })
         }
     }
@@ -177,6 +204,12 @@ class FutureLock extends Phaser.Scene {
         this.load.image('futureLock', 'lock_future.png');
     }
     create(){
+        this.exitButton = this.add.text(50, 50, "X").setFontSize(50);
+        this.exitButton.setInteractive();
+        this.exitButton.on('pointerdown', () => {
+            this.scene.stop('futurelock');
+            this.scene.resume('level2future');
+        })
         this.add.image(960, 500, 'futureLock').setScale(1);
         this.s1 = this.add.rectangle(810, 540, 100, 100, 0xffffff);
         this.s1.setInteractive();
