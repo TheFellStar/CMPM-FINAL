@@ -86,7 +86,7 @@ class Pickup extends Phaser.Scene{
         papsound.play();
         if(display == 1){
             this.add.image(1000, 500, 'notecard').setScale(1.5);
-            this.add.text(800, 500, "This is a clue", {color: "#000000"}).setFontSize(50);
+            this.add.text(700, 300, "I go now, forward...\n\nI'll finally leave this all behind me", {color: "#000000"}).setFontSize(30);
             this.input.on('pointerdown', () => {
                 this.scene.stop('pickup');
                 this.scene.resume('level1');
@@ -94,7 +94,7 @@ class Pickup extends Phaser.Scene{
         }
         if(display == 2){
             this.add.image(1000, 500, 'contacts').setScale(1);
-            this.add.text(700, 500, "Find all to continue", {color: "#000000"}).setFontSize(50);
+            this.add.text(700, 300, "The owner left years ago,\n\nleft me in charge of this whole\n\nmansion.\n\nJust one groundskeeper for this\n\nwhole place.", {color: "#000000"}).setFontSize(30);
             this.input.on('pointerdown', () => {
                 this.scene.stop('pickup');
                 this.scene.resume('level1');
@@ -110,7 +110,7 @@ class Pickup extends Phaser.Scene{
         }
         if(display == 4){
             this.add.image(1000, 500, 'notecard').setScale(1.5);
-            this.add.text(700, 500, "Try", {color: "#000000"}).setFontSize(50);
+            this.add.text(700, 300, "I keep losing my key, maybe\n\nI'll keep a spare behind the tv", {color: "#000000"}).setFontSize(30);
             this.input.on('pointerdown', () => {
                 this.scene.stop('pickup');
                 this.scene.resume('level1alt');
@@ -118,7 +118,7 @@ class Pickup extends Phaser.Scene{
         }
         if(display == 5){
             this.add.image(1000, 500, 'contacts').setScale(1);
-            this.add.text(850, 400, "Present", {color: "#000000"}).setFontSize(50);
+            this.add.text(700, 400, "Time... It's a curious thing.\n\nI can't stop looking up at the\n\nclock and wondering...\n\nWhat if", {color: "#000000"}).setFontSize(30);
             this.input.on('pointerdown', () => {
                 this.scene.stop('pickup');
                 this.scene.resume('level1alt');
@@ -156,6 +156,12 @@ class TimeTravel extends Phaser.Scene {
                 }
                 if(level == 2){
                     this.scene.start('level1');
+                }
+                if(level == 3){
+                    this.scene.start('level2future');
+                }
+                if(level == 4){
+                    this.scene.start('level2');
                 }
             })
         })

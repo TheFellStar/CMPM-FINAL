@@ -7,7 +7,7 @@ let config = {
         height: 1080
     },
     backgroundColor: '#301934',
-    scene: [ Logo, Menu, Intro, Level1, Level1Alt, Pause, Clues, Options, Credits, Pickup, TimeTravel, FutureLock],
+    scene: [ Logo, Menu, Intro, Level1, Level1Alt, Level2, Level2Future, Pause, Clues, Options, Credits, Pickup, TimeTravel, FutureLock],
 }
 
 let game = new Phaser.Game(config);
@@ -19,3 +19,5 @@ let mopp = true;
 let full = false;
 let backgroundMusic;
 let level = 0;
+let lock = false;
+let key = false;
