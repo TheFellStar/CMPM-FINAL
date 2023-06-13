@@ -141,8 +141,7 @@ class TimeTravel extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('tunnelclock', 'textures/Clock.jpg');
-        this.load.image('metal', 'textures/alien-metal.jpg');
+        //this.load.image('tunnelclock', 'textures/time_travel_texture.png');
         this.load.image('test', 'textures/test.png');
         this.load.glsl('bundle', 'bundle.glsl.js');
     }
