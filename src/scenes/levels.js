@@ -500,6 +500,7 @@ class Level2Future extends Phaser.Scene {
         this.load.image('player', 'player.png');
     }
     create(){
+        level = 4;
         this.cameras.main.fadeIn(1000,0,0,0);
 
         this.bookshelf = this.add.image(1400, 150, 'bookshelff').setScale(.3);
@@ -754,10 +755,8 @@ class Level3 extends Phaser.Scene {
         })
 
         this.travel.on('pointerdown', () => {
-            this.cameras.main.fadeOut(1000, 0, 0,0);
-            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
-                this.scene.start('timetravel');
-            })
+            this.scene.pause('level3');
+            this.scene.launch('travelselect');
         })
     }
 }
@@ -890,6 +889,7 @@ class Level3Future extends Phaser.Scene {
             })
         })
 
+        level = 7
         this.travel = this.add.text(1800, 900, "⏱️").setFontSize(100);
         this.travel.setInteractive();
         this.travel.on('pointerdown', () => {
@@ -938,5 +938,101 @@ class Level3Past extends Phaser.Scene{
         this.door = this.add.image(1800, 500, 'doorp').setScale(.3);
         this.door.setInteractive();
         this.player = this.add.image(1400, 600, 'player').setScale(.3);
+
+        this.bookshelf.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.bookshelf.x,
+                y: this.bookshelf.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.diningTable.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.diningTable.x,
+                y: this.diningTable.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.table.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.table.x,
+                y: this.table.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
+                
+            })
+        })
+        this.carpet.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.carpet.x,
+                y: this.carpet.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
+
+            })
+        })
+        this.sofa.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.sofa.x,
+                y: this.sofa.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.tv.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.tv.x,
+                y: this.tv.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
+                
+            })
+        })
+        this.chair.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.chair.x,
+                y: this.chair.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.door.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.door.x,
+                y: this.door.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
+                
+            })
+        })
+
+        level = 8;
+        this.travel = this.add.text(1800, 900, "⏱️").setFontSize(100);
+        this.travel.setInteractive();
+
+        this.travel.on('pointerdown', () => {
+            this.cameras.main.fadeOut(1000, 0, 0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.start('timetravel');
+            })
+        })
     }
 }

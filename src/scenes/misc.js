@@ -190,6 +190,18 @@ class TimeTravel extends Phaser.Scene {
                 if(level == 4){
                     this.scene.start('level2');
                 }
+                if(level == 5){
+                    this.scene.start('level3past');
+                }
+                if(level == 6){
+                    this.scene.start('level3future');
+                }
+                if(level == 7){
+                    this.scene.start('level3');
+                }
+                if(level == 8){
+                    this.scene.start('level3');
+                }
             })
         })
     }

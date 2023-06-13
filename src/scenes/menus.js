@@ -22,7 +22,7 @@ class Menu extends Phaser.Scene{
         this.title = this.add.text(-500, 50, "Tale of Time").setFontSize(100);
         this.start = this.add.text(-300, 500, "Start", {color: '#ffffff'}).setFontSize(50);
         this.start.setInteractive();
-        this.resume = this.add.text(-375, 575, "Resume").setFontSize(50);
+        this.resume = this.add.text(-375, 575, "How to play").setFontSize(50);
         this.resume.setInteractive();
         this.options = this.add.text(-450, 650, "Options").setFontSize(50);
         this.options.setInteractive();
@@ -280,6 +280,39 @@ class Credits extends Phaser.Scene{
             this.cameras.main.fadeOut(1000,0,0,0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
                 this.scene.start('menu');
+            })
+        })
+    }
+}
+
+class TravelSelect extends Phaser.Scene {
+    constructor(){
+        super('travelselect');
+    }
+    create(){
+        this.add.rectangle(700, 500, 300, 100, 0xff0000);
+        this.past = this.add.text(640, 475, "Past", {color: "#0000000"}).setFontSize(50);
+        this.past.setInteractive();
+        this.add.rectangle(1300, 500, 300, 100, 0x00ff00);
+        this.future = this.add.text(1220, 475, "Future", {color: "#000000"}).setFontSize(50);
+        this.future.setInteractive();
+
+        this.past.on('pointerdown', () => {
+            level = 5;
+            this.cameras.main.fadeOut(1000, 0, 0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.stop('level3');
+                this.scene.stop('travelselect');
+                this.scene.start('timetravel');
+            })
+        })
+        this.future.on('pointerdown', () => {
+            level = 6;
+            this.cameras.main.fadeOut(1000, 0, 0,0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
+                this.scene.stop('level3');
+                this.scene.stop('travelselect');
+                this.scene.start('timetravel');
             })
         })
     }
