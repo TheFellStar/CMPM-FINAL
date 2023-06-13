@@ -102,7 +102,7 @@ class Pickup extends Phaser.Scene{
         }
         if(display == 3){
             this.add.image(1000, 500, 'notecard').setScale(1.5);
-            this.add.text(650, 500, "Press 'Z' to travel to the past", {color: "#000000"}).setFontSize(40);
+            this.add.text(650, 500, "Press '⏱️' to travel to the past", {color: "#000000"}).setFontSize(40);
             this.input.on('pointerdown', () => {
                 this.scene.stop('pickup');
                 this.scene.resume('level1');

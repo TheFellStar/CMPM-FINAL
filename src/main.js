@@ -6,17 +6,11 @@ let config = {
         width: 1920,
         height: 1080
     },
-    physics: {
-        default: "arcade",
-    },
     backgroundColor: '#301934',
     scene: [ Logo, Menu, Intro, Level1, Level1Alt, Pause, Clues, Options, Credits, Pickup, TimeTravel, FutureLock],
 }
 
 let game = new Phaser.Game(config);
-let cursors = null;
-let interact = null;
-let travel = null;
 let clueArr = [];
 let display = 0;
 let pmenu = null;

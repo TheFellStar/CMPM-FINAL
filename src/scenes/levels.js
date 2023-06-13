@@ -21,70 +21,132 @@ class Level1 extends Phaser.Scene {
             backgroundMusic.play();
             playing = true;
         }
-        
-        this.add.text(50,50, "Press 'X' to interact with objects").setFontSize(30);
-
-        this.furniture = this.physics.add.group();
 
         this.bookshelf = this.add.image(1400, 150, 'bookshelf').setScale(.3);
-        this.furniture.add(this.bookshelf);
+        this.bookshelf.setInteractive();
         this.diningTable = this.add.image(500, 300, 'table').setScale(.35);
-        this.furniture.add(this.diningTable);
+        this.diningTable.setInteractive();
         this.carpet = this.add.image(700, 600, 'carpet').setScale(.3);
-        this.furniture.add(this.carpet);
+        this.carpet.setInteractive();
         this.table = this.add.image(500, 1000, 'table').setScale(.35);
-        this.furniture.add(this.table);
+        this.table.setInteractive();
         this.sofa = this.add.image(900, 600, 'couch').setScale(.3);
-        this.furniture.add(this.sofa);
         this.sofa.angle = 90;
+        this.sofa.setInteractive();
         this.tv = this.add.image(125, 600, 'tv').setScale(.3);
-        this.furniture.add(this.tv);
+        this.tv.setInteractive();
         this.chair = this.add.image(1150, 950, 'chair').setScale(.3);
-        this.furniture.add(this.chair);
+        this.chair.setInteractive();
         this.door = this.add.image(1800, 500, 'door').setScale(.3);
         this.door.setInteractive();
-        this.furniture.add(this.door);
         this.player = this.add.image(1400, 600, 'player').setScale(.3);
-        this.physics.add.existing(this.player);
 
-        cursors = this.input.keyboard.createCursorKeys();
-        interact = this.input.keyboard.addKey('X');
-        travel = this.input.keyboard.addKey('Z');
+        this.travel = this.add.text(1800, 900, "⏱️").setFontSize(100);
+        this.travel.setInteractive();
 
-        interact.on('down', () => {
-            if(this.physics.overlap(this.player, this.bookshelf)){
+        this.bookshelf.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.bookshelf.x,
+                y: this.bookshelf.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
                 if(clueArr.indexOf("clue1")==-1){
                     clueArr.push("clue1");
                 }
-                clueArr.push("clue1");
                 display = 1;
                 this.scene.pause('level1');
                 this.scene.launch('pickup');
-            }else if(this.physics.overlap(this.player, this.diningTable)){
+            })
+        })
+        this.diningTable.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.diningTable.x,
+                y: this.diningTable.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
                 if(clueArr.indexOf("clue2")==-1){
                     clueArr.push("clue2");
                 }
                 display = 2;
                 this.scene.pause('level1');
                 this.scene.launch('pickup');
-            }else if(this.physics.overlap(this.player, this.chair)){
+            })
+        })
+        this.table.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.table.x,
+                y: this.table.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.carpet.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.carpet.x,
+                y: this.carpet.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.sofa.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.sofa.x,
+                y: this.sofa.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.tv.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.tv.x,
+                y: this.tv.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.chair.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.chair.x,
+                y: this.chair.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
                 if(clueArr.indexOf("clue3")==-1){
                     clueArr.push("clue3");
                 }
                 display = 3;
                 this.scene.pause('level1');
                 this.scene.launch('pickup');
-            }else if(this.physics.overlap(this.player, this.door) && clueArr.length >= 6){
-                this.scene.start('end');
-            }
+            })
         })
 
         this.door.on('pointerdown', () => {
-            this.scene.pause('level1');
-            this.scene.launch('futurelock');
+            this.tweens.add({
+                targets: this.player,
+                x: this.door.x,
+                y: this.door.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
+                this.scene.pause('level1');
+                this.scene.launch('futurelock');
+            })
         })
 
-        travel.on('down', () => {
+        this.travel.on('pointerdown', () => {
             this.cameras.main.fadeOut(1000, 0, 0,0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
                 this.scene.start('timetravel');
@@ -94,42 +156,6 @@ class Level1 extends Phaser.Scene {
         pmenu = this.input.keyboard.addKey('P');
         level = 1;
         pmenu.on('down', () => this.scene.start('pause'));
-    }
-    update(){
-        if(cursors.up.isDown){
-            this.player.body.setVelocityY(-300);
-			this.player.body.setVelocityX(0);
-        }else if(cursors.down.isDown){
-            this.player.body.setVelocityY(300);
-			this.player.body.setVelocityX(0);
-        }else if(cursors.left.isDown) {
-			this.player.body.setVelocityX(-300);
-			this.player.body.setVelocityY(0);
-		} else if(cursors.right.isDown) {
-			this.player.body.setVelocityX(300);
-			this.player.body.setVelocityY(0);
-		} else {
-			this.player.body.setVelocityX(0);
-			this.player.body.setVelocityY(0);
-        }
-
-        if(this.physics.overlap(this.player, this.bookshelf)){
-
-        }else if(this.physics.overlap(this.player, this.diningTable)){
-
-        }else if(this.physics.overlap(this.player, this.chair)){
-
-        }else if(this.physics.overlap(this.player, this.tv)){
-
-        }else if(this.physics.overlap(this.player, this.door)){
-
-        }else if(this.physics.overlap(this.player, this.carpet)){
-
-        }else if(this.physics.overlap(this.player, this.table)){
-
-        }else if(this.physics.overlap(this.player, this.sofa)){
-
-        }
     }
 }
 
@@ -150,58 +176,126 @@ class Level1Alt extends Phaser.Scene {
         this.load.image('player', 'player.png');
     }
     create(){
-        this.furniture = this.physics.add.group();
-
         this.bookshelf = this.add.image(1400, 150, 'bookshelfp').setScale(.3);
-        this.furniture.add(this.bookshelf);
+        this.bookshelf.setInteractive();
         this.diningTable = this.add.image(500, 300, 'tablep').setScale(.35);
-        this.furniture.add(this.diningTable);
+        this.diningTable.setInteractive();
         this.carpet = this.add.image(700, 600, 'carpetp').setScale(.3);
-        this.furniture.add(this.carpet);
+        this.carpet.setInteractive();
         this.table = this.add.image(500, 1000, 'tablep').setScale(.35);
-        this.furniture.add(this.table);
+        this.table.setInteractive();
         this.sofa = this.add.image(900, 600, 'sofa').setScale(.3);
-        this.furniture.add(this.sofa);
+        this.sofa.setInteractive();
         this.sofa.angle = 90;
         this.tv = this.add.image(125, 600, 'tvp').setScale(.3);
-        this.furniture.add(this.tv);
+        this.tv.setInteractive();
         this.chair = this.add.image(1150, 950, 'chairp').setScale(.3);
-        this.furniture.add(this.chair);
+        this.chair.setInteractive();
         this.door = this.add.image(1800, 500, 'doorp').setScale(.3);
-        this.furniture.add(this.door);
+        this.door.setInteractive();
         this.player = this.add.image(1400, 600, 'player').setScale(.3);
-        this.physics.add.existing(this.player);
 
-        cursors = this.input.keyboard.createCursorKeys();
-        travel = this.input.keyboard.addKey('Z');
-        interact = this.input.keyboard.addKey('X');
-
-        interact.on('down', () => {
-            if(this.physics.overlap(this.player, this.tv)){
-                if(clueArr.indexOf("clue4")==-1){
-                    clueArr.push("clue4");
-                }
-                display = 4;
-                this.scene.pause('level1alt');
-                this.scene.launch('pickup');
-            }else if(this.physics.overlap(this.player, this.table)){
+        this.bookshelf.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.bookshelf.x,
+                y: this.bookshelf.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.diningTable.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.diningTable.x,
+                y: this.diningTable.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.table.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.table.x,
+                y: this.table.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
                 if(clueArr.indexOf("clue5")==-1){
                     clueArr.push("clue5");
                 }
                 display = 5;
                 this.scene.pause('level1alt');
                 this.scene.launch('pickup');
-            }else if(this.physics.overlap(this.player, this.carpet)){
+            })
+        })
+        this.carpet.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.carpet.x,
+                y: this.carpet.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
                 if(clueArr.indexOf("clue6")==-1){
                     clueArr.push("clue6");
                 }
                 display = 6;
                 this.scene.pause('level1alt');
                 this.scene.launch('pickup');
-            }
+            })
+        })
+        this.sofa.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.sofa.x,
+                y: this.sofa.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.tv.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.tv.x,
+                y: this.tv.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
+                if(clueArr.indexOf("clue4")==-1){
+                    clueArr.push("clue4");
+                }
+                display = 4;
+                this.scene.pause('level1alt');
+                this.scene.launch('pickup');
+            })
+        })
+        this.chair.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.chair.x,
+                y: this.chair.y,
+                duration: 500,
+                ease: 'Linear',
+            })
+        })
+        this.door.on('pointerdown', () => {
+            this.tweens.add({
+                targets: this.player,
+                x: this.door.x,
+                y: this.door.y,
+                duration: 500,
+                ease: 'Linear',
+            })
         })
 
-        travel.on('down', () => {
+        this.travel = this.add.text(1800, 900, "⏱️").setFontSize(100);
+        this.travel.setInteractive();
+
+        this.travel.on('pointerdown', () => {
             this.cameras.main.fadeOut(1000, 0, 0,0);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) =>{
                 this.scene.start('timetravel');
@@ -211,24 +305,6 @@ class Level1Alt extends Phaser.Scene {
         pmenu = this.input.keyboard.addKey('P');
         level = 2;
         pmenu.on('down', () => this.scene.start('pause'));
-    }
-    update(){
-        if(cursors.up.isDown){
-            this.player.body.setVelocityY(-300);
-			this.player.body.setVelocityX(0);
-        }else if(cursors.down.isDown){
-            this.player.body.setVelocityY(300);
-			this.player.body.setVelocityX(0);
-        }else if(cursors.left.isDown) {
-			this.player.body.setVelocityX(-300);
-			this.player.body.setVelocityY(0);
-		} else if(cursors.right.isDown) {
-			this.player.body.setVelocityX(300);
-			this.player.body.setVelocityY(0);
-		} else {
-			this.player.body.setVelocityX(0);
-			this.player.body.setVelocityY(0);
-        }
     }
 }
 
