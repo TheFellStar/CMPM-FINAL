@@ -141,7 +141,7 @@ class TimeTravel extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        //this.load.image('tunnelclock', 'textures/time_travel_texture.png');
+        //this.load.image('tunnelTexture', 'textures/time_travel_texture.png');
         this.load.image('test', 'textures/test.png');
         this.load.glsl('bundle', 'bundle.glsl.js');
     }
@@ -159,5 +159,22 @@ class TimeTravel extends Phaser.Scene {
                 }
             })
         })
+    }
+}
+
+class FutureLock extends Phaser.Scene {
+    constructor(){
+        super('futurelock');
+    }
+    preload(){
+        this.load.path = './assets/';
+        this.load.image('futureLock', 'lock_future.png');
+    }
+    create(){
+        this.add.image(960, 500, 'futureLock').setScale(1);
+        this.s1 = this.add.rectangle(810, 540, 100, 100, 0x0000ff);
+        this.s2 = this.add.rectangle(910, 540, 100, 100, 0xffff00);
+        this.s3 = this.add.rectangle(1010, 540, 100, 100, 0xff00ff);
+        this.s4 = this.add.rectangle(1110, 540, 100, 100, 0x00ffff);
     }
 }

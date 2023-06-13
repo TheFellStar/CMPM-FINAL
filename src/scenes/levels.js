@@ -42,6 +42,7 @@ class Level1 extends Phaser.Scene {
         this.chair = this.add.image(1150, 950, 'chair').setScale(.3);
         this.furniture.add(this.chair);
         this.door = this.add.image(1800, 500, 'door').setScale(.3);
+        this.door.setInteractive();
         this.furniture.add(this.door);
         this.player = this.add.image(1400, 600, 'player').setScale(.3);
         this.physics.add.existing(this.player);
@@ -76,6 +77,11 @@ class Level1 extends Phaser.Scene {
             }else if(this.physics.overlap(this.player, this.door) && clueArr.length >= 6){
                 this.scene.start('end');
             }
+        })
+
+        this.door.on('pointerdown', () => {
+            this.scene.pause('level1');
+            this.scene.launch('futurelock');
         })
 
         travel.on('down', () => {
