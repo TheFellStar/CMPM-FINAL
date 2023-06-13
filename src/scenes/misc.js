@@ -178,9 +178,98 @@ class FutureLock extends Phaser.Scene {
     }
     create(){
         this.add.image(960, 500, 'futureLock').setScale(1);
-        this.s1 = this.add.rectangle(810, 540, 100, 100, 0x0000ff);
-        this.s2 = this.add.rectangle(910, 540, 100, 100, 0xffff00);
-        this.s3 = this.add.rectangle(1010, 540, 100, 100, 0xff00ff);
-        this.s4 = this.add.rectangle(1110, 540, 100, 100, 0x00ffff);
+        this.s1 = this.add.rectangle(810, 540, 100, 100, 0xffffff);
+        this.s1.setInteractive();
+        this.s2 = this.add.rectangle(910, 540, 100, 100, 0xffffff);
+        this.s2.setInteractive();
+        this.s3 = this.add.rectangle(1010, 540, 100, 100, 0xffffff);
+        this.s3.setInteractive();
+        this.s4 = this.add.rectangle(1110, 540, 100, 100, 0xffffff);
+        this.s4.setInteractive();
+
+        this.s1c = 0;
+        this.s2c = 0;
+        this.s3c = 0;
+        this.s4c = 0;
+
+        this.s1.on('pointerdown', () => {
+            if(this.s1c == 0){
+                this.s1.setFillStyle(0xff00ff);
+                this.s1c = 1;
+            }else if(this.s1c == 1){
+                this.s1.setFillStyle(0xffff00);
+                this.s1c = 2;
+            }else if(this.s1c == 2){
+                this.s1.setFillStyle(0x0000ff);
+                this.s1c = 3;
+            }else if(this.s1c == 3){
+                this.s1.setFillStyle(0x00ffff);
+                this.s1c = 4;
+            }else {
+                this.s1.setFillStyle(0xffffff);
+                this.s1c = 0;
+            }
+        })
+        this.s2.on('pointerdown', () => {
+            if(this.s2c == 0){
+                this.s2.setFillStyle(0xff00ff);
+                this.s2c = 1;
+            }else if(this.s2c == 1){
+                this.s2.setFillStyle(0xffff00);
+                this.s2c = 2;
+            }else if(this.s2c == 2){
+                this.s2.setFillStyle(0x0000ff);
+                this.s2c = 3;
+            }else if(this.s2c == 3){
+                this.s2.setFillStyle(0x00ffff);
+                this.s2c = 4;
+            }else {
+                this.s2.setFillStyle(0xffffff);
+                this.s2c = 0;
+            }
+        })
+        this.s3.on('pointerdown', () => {
+            if(this.s3c == 0){
+                this.s3.setFillStyle(0xff00ff);
+                this.s3c = 1;
+            }else if(this.s3c == 1){
+                this.s3.setFillStyle(0xffff00);
+                this.s3c = 2;
+            }else if(this.s3c == 2){
+                this.s3.setFillStyle(0x0000ff);
+                this.s3c = 3;
+            }else if(this.s3c == 3){
+                this.s3.setFillStyle(0x00ffff);
+                this.s3c = 4;
+            }else {
+                this.s3.setFillStyle(0xffffff);
+                this.s3c = 0;
+            }
+        })
+        this.s4.on('pointerdown', () => {
+            if(this.s4c == 0){
+                this.s4.setFillStyle(0xff00ff);
+                this.s4c = 1;
+            }else if(this.s4c == 1){
+                this.s4.setFillStyle(0xffff00);
+                this.s4c = 2;
+            }else if(this.s4c == 2){
+                this.s4.setFillStyle(0x0000ff);
+                this.s4c = 3;
+            }else if(this.s4c == 3){
+                this.s4.setFillStyle(0x00ffff);
+                this.s4c = 4;
+            }else {
+                this.s4.setFillStyle(0xffffff);
+                this.s4c = 0;
+            }
+        })
+    }
+    update(){
+        if(this.s1c == 3 && this.s2c == 2 && this.s3c == 1 && this.s4c == 4){
+            this.scene.stop('Futurelock');
+            this.scene.stop('level2future');
+            this.scene.start('level3');
+        }
     }
 }

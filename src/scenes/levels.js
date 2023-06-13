@@ -190,6 +190,10 @@ class Level1Alt extends Phaser.Scene {
     create(){
         this.cameras.main.fadeIn(1000,0,0,0);
 
+        if(lock == true){
+            this.doorText = this.add.text(50, 50, "The door stayed unlocked from the past").setFontSize(30);
+        }
+
         this.bookshelf = this.add.image(1400, 150, 'bookshelfp').setScale(.3);
         this.bookshelf.setInteractive();
         this.diningTable = this.add.image(500, 300, 'tablep').setScale(.35);
@@ -646,17 +650,8 @@ class Level2Future extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                if(lock == false){
-                    this.doorText = this.add.text(50, 50, "The lock is rusted shut, can't get it open...").setFontSize(30);
-                    this.tweens.add({
-                        targets: this.doorText,
-                        alpha: {from: 1, to: 0},
-                        duration: 2000,
-                        ease: 'Linear',
-                    })
-                }else{
-                    this.scene.start('level2');
-                }
+                this.scene.pause('level2future');
+                this.scene.launch('futurelock');
             })
         })
 
@@ -668,5 +663,17 @@ class Level2Future extends Phaser.Scene {
                 this.scene.start('timetravel');
             })
         })
+    }
+}
+
+class Level3 extends Phaser.Scene {
+    constructor(){
+        super('level3');
+    }
+    preload(){
+
+    }
+    create(){
+
     }
 }
