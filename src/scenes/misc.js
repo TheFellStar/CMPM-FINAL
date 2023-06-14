@@ -318,3 +318,28 @@ class FutureLock extends Phaser.Scene {
         }
     }
 }
+
+class FinalLock extends Phaser.Scene {
+    constructor(){
+        super('finallock');
+    }
+    preload(){
+        this.load.path = './assets/';
+        this.load.image('lock', 'lock_present.png');
+    }
+    create(){
+        this.add.text(50, 50, "Who are you investigating? Two letters").setFontSize(50);
+        this.add.image(960, 540, 'lock');
+        this.input.keyboard.createCombo('ME');
+        this.input.keyboard.on('keycombomatch', () => {
+            this.add.text(875, 575, "M", {color: "#000000"}).setFontSize(100);
+            this.add.text(1020, 575, "E", {color: "#000000"}).setFontSize(100);
+        })
+        this.back = this.add.text(1700, 900, "Back").setFontSize(50);
+        this.back.setInteractive();
+        this.back.on('pointerdown', () => {
+            this.scene.resume('level3past');
+            this.scene.stop('finallock');
+        })
+    }
+}
