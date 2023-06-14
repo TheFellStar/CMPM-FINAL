@@ -159,6 +159,30 @@ class Pickup extends Phaser.Scene{
                 this.scene.resume('level2');
             })
         }
+        if(display == 10){
+            this.add.image(1000, 500, 'diary').setScale(1);
+            this.add.text(700, 400, "I think I'm losing it.\n\nI read my diary from the other day,\n\nI thought I was the groundskeeper of\n\nthis place. I don't know how\n\nlong I've been here anymore...", {color: "#000000"}).setFontSize(30);
+            this.input.on('pointerdown', () => {
+                this.scene.stop('pickup');
+                this.scene.resume('level3');
+            })
+        }
+        if(display == 11){
+            this.add.image(1000, 500, 'futureDiary').setScale(1);
+            this.add.text(700, 400, "The days blur, I wish I had never\n\nmessed with time. I wish someone\n\nwould come save me now... \n\nmaybe a time detective.", {color: "#000000"}).setFontSize(30);
+            this.input.on('pointerdown', () => {
+                this.scene.stop('pickup');
+                this.scene.resume('level3future');
+            })
+        }
+        if(display == 12){
+            this.add.image(1000, 500, 'letter').setScale(1);
+            this.add.text(720, 400, "I've figured it out, I'm in a\n\nloop. I'm stuck living the same\n\n3 days over and over. I can\n\ntravel between them but I can't\n\nescape them. My time machine\n\nmust've gone wrong...", {color: "#000000"}).setFontSize(30);
+            this.input.on('pointerdown', () => {
+                this.scene.stop('pickup');
+                this.scene.resume('level3past');
+            })
+        }
     }
 }
 
@@ -334,6 +358,9 @@ class FinalLock extends Phaser.Scene {
         this.input.keyboard.on('keycombomatch', () => {
             this.add.text(875, 575, "M", {color: "#000000"}).setFontSize(100);
             this.add.text(1020, 575, "E", {color: "#000000"}).setFontSize(100);
+            this.scene.stop('level3past');
+            this.scene.stop('finallock');
+            this.scene.start('end');
         })
         this.back = this.add.text(1700, 900, "Back").setFontSize(50);
         this.back.setInteractive();
@@ -341,5 +368,14 @@ class FinalLock extends Phaser.Scene {
             this.scene.resume('level3past');
             this.scene.stop('finallock');
         })
+    }
+}
+
+class End extends Phaser.Scene {
+    constructor(){
+        super('end');
+    }
+    create(){
+
     }
 }

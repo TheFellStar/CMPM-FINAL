@@ -681,9 +681,6 @@ class Level3 extends Phaser.Scene {
                 duration: 500,
                 ease: 'Linear',
             })
-            this.time.delayedCall(500, () => {
-                
-            })
         })
         this.table.on('pointerdown', () => {
             this.tweens.add({
@@ -722,6 +719,11 @@ class Level3 extends Phaser.Scene {
                 y: this.tv.y,
                 duration: 500,
                 ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
+                display = 10;
+                this.scene.pause('level3');
+                this.scene.launch('pickup');
             })
         })
         this.chair.on('pointerdown', () => {
@@ -807,9 +809,6 @@ class Level3Future extends Phaser.Scene {
                 duration: 500,
                 ease: 'Linear',
             })
-            this.time.delayedCall(500, () => {
-                
-            })
         })
         this.diningTable.on('pointerdown', () => {
             this.tweens.add({
@@ -827,6 +826,11 @@ class Level3Future extends Phaser.Scene {
                 y: this.table.y,
                 duration: 500,
                 ease: 'Linear',
+            })
+            this.time.delayedCall(500, () => {
+                display = 11;
+                this.scene.pause('level3future');
+                this.scene.launch('pickup');
             })
         })
         this.carpet.on('pointerdown', () => {
@@ -878,7 +882,6 @@ class Level3Future extends Phaser.Scene {
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                this.doorText.destroy();
                 this.doorText = this.add.text(50, 50, "The lock changed, this one seems too complicated").setFontSize(30);
                 this.tweens.add({
                     targets: this.doorText,
@@ -965,9 +968,6 @@ class Level3Past extends Phaser.Scene{
                 duration: 500,
                 ease: 'Linear',
             })
-            this.time.delayedCall(500, () => {
-                
-            })
         })
         this.carpet.on('pointerdown', () => {
             this.tweens.add({
@@ -978,7 +978,9 @@ class Level3Past extends Phaser.Scene{
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-
+                display = 12;
+                this.scene.pause('level3past');
+                this.scene.launch('pickup');
             })
         })
         this.sofa.on('pointerdown', () => {
@@ -1020,7 +1022,8 @@ class Level3Past extends Phaser.Scene{
                 ease: 'Linear',
             })
             this.time.delayedCall(500, () => {
-                
+                this.scene.pause('level3past');
+                this.scene.launch('finallock');
             })
         })
 
