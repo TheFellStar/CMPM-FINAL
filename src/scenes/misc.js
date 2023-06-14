@@ -4,7 +4,7 @@ class Logo extends Phaser.Scene{
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('logo', 'studio_logo_TEMP.png');
+        this.load.image('logo', 'studio_logo_TEMP-min.png');
     }
     create(){
         this.logo = this.add.image(1000, 500, 'logo').setScale(.25);
@@ -376,6 +376,20 @@ class End extends Phaser.Scene {
         super('end');
     }
     create(){
-
+        this.cameras.main.fadeIn(1000,0,0,0);
+        this.label = this.add.text(100, 200, '').setFontSize(40);
+        this.typewriteText('As you open the door you once again step into the deralict house.\n\nYou curl into a ball on the floor, wondering why.\n\nWhat could have possibly gone wrong.\n\nMaybe one day you can escape, maybe one day you can be free.\n\nBut for now you are doomed to repeat, over, and over... again.\n\n\n\n\n                                  The End.');
+    }
+    typewriteText(text){
+        const length = text.length
+        let i = 0
+        this.time.addEvent({
+            callback: () => {
+                this.label.text += text[i]
+                ++i
+            },
+            repeat: length - 1,
+            delay: 100
+        })
     }
 }

@@ -7,7 +7,7 @@ class Menu extends Phaser.Scene{
         this.load.image('time', 'Clock.jpg');
         this.load.image('paper', 'paper_TEMP.png');
         this.load.image('clock', 'clock_TEMP.png');
-        this.load.audio('background', 'Serge Quadrado - Suspense Piano.mp3');
+        this.load.audio('background', 'Blue-Dot-Sessions-Tangle.mp3');
     }
     create(){
         let interact = true;
@@ -140,6 +140,11 @@ class Menu extends Phaser.Scene{
                 this.scene.start('options');
             }
         })
+        this.resume.on('pointerdown', () => {
+            if(interact == true){
+                this.scene.start('howplay');
+            }
+        })
         this.start.on('pointerdown', () => {
             if(interact == true){
                 interact = false;
@@ -175,14 +180,12 @@ class Pause extends Phaser.Scene {
         super('pause');
     }
     create(){
-        this.add.text(800, 50, "Game Paused").setFontSize(50);
-        this.cont = this.add.text(900, 500, "Continue").setFontSize(30);
+        this.add.text(700, 50, "Game Paused").setFontSize(100);
+        this.cont = this.add.text(900, 300, "Continue").setFontSize(50);
         this.cont.setInteractive();
-        this.check = this.add.text(900, 600, "Check Clues").setFontSize(30);
-        this.check.setInteractive();
-        this.options = this.add.text(900, 700, "Options").setFontSize(30);
+        this.options = this.add.text(900, 500, "Options").setFontSize(50);
         this.options.setInteractive();
-        this.exit = this.add.text(900, 800, "Exit").setFontSize(30);
+        this.exit = this.add.text(900, 700, "Exit").setFontSize(50);
         this.exit.setInteractive();
 
         this.cont.on('pointerdown', () => {
@@ -192,9 +195,27 @@ class Pause extends Phaser.Scene {
             if(level == 2){
                 this.scene.start('level1alt');
             }
+            if(level == 3){
+                this.scene.start('level2');
+            }
+            if(level == 4){
+                this.scene.start('level2future');
+            }
+            if(level == 5){
+                this.scene.start('level3');
+            }
+            if(level == 7){
+                this.scene.start('level3future');
+            }
+            if(level == 8){
+                this.scene.start('level3past');
+            }
         })
         this.options.on('pointerdown', () => {
             this.scene.start('options');
+        })
+        this.exit.on('pointerdown', () => {
+            this.scene.start('logo');
         })
     }
 }
@@ -273,7 +294,12 @@ class Credits extends Phaser.Scene{
         super('credits');
     }
     create(){
-        this.add.text(800, 500, "Credits go here").setFontSize(50);
+        this.add.text(200, 300, "Time travel tunnel texture aquired at: https://clipground.com/24-bit-png-image.html").setFontSize(30);
+        this.add.text(200, 400, "Main menu paper assets aquired from: https://www.pixilart.com/art/pixel-paper-2e29f43a603936d").setFontSize(30);
+        this.add.text(200, 500, "Grandfather clock aquired from: https://www.pixilart.com/art/grandfather-clock-d658d81399dd7f9").setFontSize(30);
+        this.add.text(200, 600, "Royalty free audio assets aquired from Pixabay").setFontSize(30);
+        this.add.text(200, 700, "Logo asset created by Harry Chou").setFontSize(30);
+        this.add.text(200, 800, "Other assets created by Aidan Andreasen").setFontSize(30);
         this.back = this.add.text(50, 50, "Go back").setFontSize(30);
         this.back.setInteractive();
         this.back.on('pointerdown', () => {
@@ -315,5 +341,21 @@ class TravelSelect extends Phaser.Scene {
                 this.scene.start('timetravel');
             })
         })
+    }
+}
+
+class HowPlay extends Phaser.Scene{
+    constructor(){
+        super('howplay');
+    }
+    create(){
+        this.back = this.add.text(50, 50, "Back").setFontSize(30);
+        this.back.setInteractive();
+        this.back.on('pointerdown', () => {
+            this.scene.start('menu');
+        })
+        this.add.text(100, 400, "Click on objects to move around.").setFontSize(50);
+        this.add.text(100, 500, "When in doubt, try clicking on something to see what it does.").setFontSize(50);
+        this.add.text(100, 600, "There will be a puzzle in each room to open a door.").setFontSize(50);
     }
 }

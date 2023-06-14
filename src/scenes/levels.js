@@ -6,7 +6,7 @@ class Level1 extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('bed', 'bed_present.png');
         this.load.image('bookshelf', 'bookshelf_present.png');
-        this.load.image('carpet', 'carpet_present.png');
+        this.load.image('carpet', 'carpet_present-min.png');
         this.load.image('chair', 'chair_present.png');
         this.load.image('couch', 'couch_present.png');
         this.load.image('door', 'door_present.png');
@@ -160,9 +160,10 @@ class Level1 extends Phaser.Scene {
             })
         })
 
-        pmenu = this.input.keyboard.addKey('P');
+        this.pmenu = this.add.text(1800, 50, "⚙️").setFontSize(50);
+        this.pmenu.setInteractive();
         level = 1;
-        pmenu.on('down', () => this.scene.start('pause'));
+        this.pmenu.on('pointerdown', () => this.scene.start('pause'));
     }
 }
 
@@ -174,7 +175,7 @@ class Level1Alt extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('bedp', 'bed_past.png');
         this.load.image('bookshelfp', 'bookshelf_past.png');
-        this.load.image('carpetp', 'carpet_past.png');
+        this.load.image('carpetp', 'carpet_past-min.png');
         this.load.image('chairp', 'chair_past.png');
         this.load.image('doorp', 'door_past.png');
         this.load.image('sofa', 'sofa_past.png');
@@ -327,9 +328,10 @@ class Level1Alt extends Phaser.Scene {
             })
         })
 
-        pmenu = this.input.keyboard.addKey('P');
+        this.pmenu = this.add.text(1800, 50, "⚙️").setFontSize(50);
+        this.pmenu.setInteractive();
         level = 2;
-        pmenu.on('down', () => this.scene.start('pause'));
+        this.pmenu.on('pointerdown', () => this.scene.start('pause'));
     }
 }
 
@@ -341,7 +343,7 @@ class Level2 extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('bed', 'bed_present.png');
         this.load.image('bookshelf', 'bookshelf_present.png');
-        this.load.image('carpet', 'carpet_present.png');
+        this.load.image('carpet', 'carpet_present-min.png');
         this.load.image('chair', 'chair_present.png');
         this.load.image('couch', 'couch_present.png');
         this.load.image('door', 'door_present.png');
@@ -477,9 +479,10 @@ class Level2 extends Phaser.Scene {
             })
         })
 
-        pmenu = this.input.keyboard.addKey('P');
+        this.pmenu = this.add.text(1800, 50, "⚙️").setFontSize(50);
+        this.pmenu.setInteractive();
         level = 3;
-        pmenu.on('down', () => this.scene.start('pause'));
+        this.pmenu.on('pointerdown', () => this.scene.start('pause'));
     }
 }
 
@@ -491,7 +494,7 @@ class Level2Future extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('bedf', 'bed_future.png');
         this.load.image('bookshelff', 'bookshelf_future.png');
-        this.load.image('carpetf', 'carpet_future.png');
+        this.load.image('carpetf', 'carpet_future-min.png');
         this.load.image('chairf', 'chair_future.png');
         this.load.image('couchf', 'couch_future.png');
         this.load.image('doorf', 'door_future.png');
@@ -511,7 +514,7 @@ class Level2Future extends Phaser.Scene {
         this.carpet.setInteractive();
         this.table = this.add.image(500, 1000, 'tablef').setScale(.35);
         this.table.setInteractive();
-        this.sofa = this.add.image(900, 600, 'couchf').setScale(.3);
+        this.sofa = this.add.image(900, 600, 'couchf').setScale(.7);
         this.sofa.angle = 90;
         this.sofa.setInteractive();
         this.tv = this.add.image(125, 600, 'tvf').setScale(.3);
@@ -618,6 +621,11 @@ class Level2Future extends Phaser.Scene {
                 this.scene.start('timetravel');
             })
         })
+
+        this.pmenu = this.add.text(1800, 50, "⚙️").setFontSize(50);
+        this.pmenu.setInteractive();
+        level = 4;
+        this.pmenu.on('pointerdown', () => this.scene.start('pause'));
     }
 }
 
@@ -629,7 +637,7 @@ class Level3 extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('bed', 'bed_present.png');
         this.load.image('bookshelf', 'bookshelf_present.png');
-        this.load.image('carpet', 'carpet_present.png');
+        this.load.image('carpet', 'carpet_present-min.png');
         this.load.image('chair', 'chair_present.png');
         this.load.image('couch', 'couch_present.png');
         this.load.image('door', 'door_present.png');
@@ -760,6 +768,11 @@ class Level3 extends Phaser.Scene {
             this.scene.pause('level3');
             this.scene.launch('travelselect');
         })
+
+        this.pmenu = this.add.text(1800, 50, "⚙️").setFontSize(50);
+        this.pmenu.setInteractive();
+        level = 5;
+        this.pmenu.on('pointerdown', () => this.scene.start('pause'));
     }
 }
 
@@ -771,7 +784,7 @@ class Level3Future extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('bedf', 'bed_future.png');
         this.load.image('bookshelff', 'bookshelf_future.png');
-        this.load.image('carpetf', 'carpet_future.png');
+        this.load.image('carpetf', 'carpet_future-min.png');
         this.load.image('chairf', 'chair_future.png');
         this.load.image('couchf', 'couch_future.png');
         this.load.image('doorf', 'door_future.png');
@@ -790,7 +803,7 @@ class Level3Future extends Phaser.Scene {
         this.carpet.setInteractive();
         this.table = this.add.image(500, 1000, 'tablef').setScale(.35);
         this.table.setInteractive();
-        this.sofa = this.add.image(900, 600, 'couchf').setScale(.3);
+        this.sofa = this.add.image(900, 600, 'couchf').setScale(.7);
         this.sofa.angle = 90;
         this.sofa.setInteractive();
         this.tv = this.add.image(125, 600, 'tvf').setScale(.3);
@@ -901,6 +914,10 @@ class Level3Future extends Phaser.Scene {
                 this.scene.start('timetravel');
             })
         })
+
+        this.pmenu = this.add.text(1800, 50, "⚙️").setFontSize(50);
+        this.pmenu.setInteractive();
+        this.pmenu.on('pointerdown', () => this.scene.start('pause'));
     }
 }
 
@@ -912,7 +929,7 @@ class Level3Past extends Phaser.Scene{
         this.load.path = './assets/';
         this.load.image('bedp', 'bed_past.png');
         this.load.image('bookshelfp', 'bookshelf_past.png');
-        this.load.image('carpetp', 'carpet_past.png');
+        this.load.image('carpetp', 'carpet_past-min.png');
         this.load.image('chairp', 'chair_past.png');
         this.load.image('doorp', 'door_past.png');
         this.load.image('sofa', 'sofa_past.png');
@@ -1037,5 +1054,9 @@ class Level3Past extends Phaser.Scene{
                 this.scene.start('timetravel');
             })
         })
+
+        this.pmenu = this.add.text(1800, 50, "⚙️").setFontSize(50);
+        this.pmenu.setInteractive();
+        this.pmenu.on('pointerdown', () => this.scene.start('pause'));
     }
 }
