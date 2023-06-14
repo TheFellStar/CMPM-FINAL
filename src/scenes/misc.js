@@ -85,6 +85,13 @@ class Pickup extends Phaser.Scene{
         this.load.audio('paper', 'paper sound.mp3');
     }
     create(){
+        this.caption = this.add.text(900, 1000, "[Paper turning]").setFontSize(30);
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 2000,
+            ease: 'Linear',
+        })
         let papsound = this.sound.add('paper');
         papsound.play();
         if(display == 1){

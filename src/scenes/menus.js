@@ -19,6 +19,17 @@ class Menu extends Phaser.Scene{
             playing = true;
         }
 
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         this.title = this.add.text(-500, 50, "Tale of Time").setFontSize(100);
         this.start = this.add.text(-300, 500, "Start", {color: '#ffffff'}).setFontSize(50);
         this.start.setInteractive();
@@ -180,6 +191,17 @@ class Pause extends Phaser.Scene {
         super('pause');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         this.add.text(700, 50, "Game Paused").setFontSize(100);
         this.cont = this.add.text(900, 300, "Continue").setFontSize(50);
         this.cont.setInteractive();
@@ -225,6 +247,17 @@ class Options extends Phaser.Scene {
         super('options');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         this.add.text(750, 100, "Options").setFontSize(100);
         this.add.text(750, 300, "Music").setFontSize(50);
         this.add.text(750, 500, "Fullscreen").setFontSize(50);
@@ -268,12 +301,20 @@ class Options extends Phaser.Scene {
                 this.music.setText("On");
                 playing = true;
                 backgroundMusic.play();
+                this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+                this.tweens.add({
+                    targets: this.caption,
+                    alpha: {from: 1, to: 0},
+                    duration: 5000,
+                    ease: 'Linear',
+                })
             }else{
                 mopp = false;
                 this.music.setColor("#ff0000");
                 this.music.setText("Off");
                 playing = false;
                 backgroundMusic.stop();
+                this.caption.destroy();
             }
         })
 
@@ -294,6 +335,18 @@ class Credits extends Phaser.Scene{
         super('credits');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
+
         this.add.text(200, 300, "Time travel tunnel texture aquired at: https://clipground.com/24-bit-png-image.html").setFontSize(30);
         this.add.text(200, 400, "Main menu paper assets aquired from: https://www.pixilart.com/art/pixel-paper-2e29f43a603936d").setFontSize(30);
         this.add.text(200, 500, "Grandfather clock aquired from: https://www.pixilart.com/art/grandfather-clock-d658d81399dd7f9").setFontSize(30);

@@ -4,14 +4,13 @@ class Level1 extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('bed', 'bed_present.png');
         this.load.image('bookshelf', 'bookshelf_present.png');
         this.load.image('carpet', 'carpet_present-min.png');
         this.load.image('chair', 'chair_present.png');
         this.load.image('couch', 'couch_present.png');
         this.load.image('door', 'door_present.png');
-        this.load.image('tv', 'tv_present.png');
-        this.load.image('table', 'table_present.png');
+        this.load.image('tv', 'tv_present-min.png');
+        this.load.image('table', 'table_present-min.png');
         this.load.image('player', 'player.png');
     }
     create(){
@@ -21,6 +20,17 @@ class Level1 extends Phaser.Scene {
             backgroundMusic.play();
             playing = true;
         }
+
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
 
         if(lock == true){
             this.doorText = this.add.text(50, 50, "The door stayed unlocked from the past").setFontSize(30);
@@ -173,7 +183,6 @@ class Level1Alt extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('bedp', 'bed_past.png');
         this.load.image('bookshelfp', 'bookshelf_past.png');
         this.load.image('carpetp', 'carpet_past-min.png');
         this.load.image('chairp', 'chair_past-min.png');
@@ -184,6 +193,17 @@ class Level1Alt extends Phaser.Scene {
         this.load.image('player', 'player.png');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         this.cameras.main.fadeIn(1000,0,0,0);
 
         this.bookshelf = this.add.image(1400, 150, 'bookshelfp').setScale(.3);
@@ -341,17 +361,27 @@ class Level2 extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('bed', 'bed_present.png');
         this.load.image('bookshelf', 'bookshelf_present.png');
         this.load.image('carpet', 'carpet_present-min.png');
         this.load.image('chair', 'chair_present.png');
         this.load.image('couch', 'couch_present.png');
         this.load.image('door', 'door_present.png');
-        this.load.image('tv', 'tv_present.png');
-        this.load.image('table', 'table_present.png');
+        this.load.image('tv', 'tv_present-min.png');
+        this.load.image('table', 'table_present-min.png');
         this.load.image('player', 'player.png');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         this.cameras.main.fadeIn(1000,0,0,0);
 
         this.doorText = this.add.text(50, 50, "Strange... it's the same room. Maybe I'll try the future instead.").setFontSize(30);
@@ -492,7 +522,6 @@ class Level2Future extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('bedf', 'bed_future.png');
         this.load.image('bookshelff', 'bookshelf_future.png');
         this.load.image('carpetf', 'carpet_future-min.png');
         this.load.image('chairf', 'chair_future-min.png');
@@ -503,6 +532,17 @@ class Level2Future extends Phaser.Scene {
         this.load.image('player', 'player.png');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         level = 4;
         this.cameras.main.fadeIn(1000,0,0,0);
 
@@ -635,17 +675,27 @@ class Level3 extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('bed', 'bed_present.png');
         this.load.image('bookshelf', 'bookshelf_present.png');
         this.load.image('carpet', 'carpet_present-min.png');
         this.load.image('chair', 'chair_present.png');
         this.load.image('couch', 'couch_present.png');
         this.load.image('door', 'door_present.png');
-        this.load.image('tv', 'tv_present.png');
-        this.load.image('table', 'table_present.png');
+        this.load.image('tv', 'tv_present-min.png');
+        this.load.image('table', 'table_present-min.png');
         this.load.image('player', 'player.png');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         this.cameras.main.fadeIn(1000,0,0,0);
 
         this.doorText = this.add.text(50, 50, "The door unlocked, but here we are again.... this can't be right").setFontSize(30);
@@ -782,7 +832,6 @@ class Level3Future extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('bedf', 'bed_future.png');
         this.load.image('bookshelff', 'bookshelf_future.png');
         this.load.image('carpetf', 'carpet_future-min.png');
         this.load.image('chairf', 'chair_future-min.png');
@@ -793,6 +842,17 @@ class Level3Future extends Phaser.Scene {
         this.load.image('player', 'player.png');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         this.cameras.main.fadeIn(1000,0,0,0);
 
         this.bookshelf = this.add.image(1400, 150, 'bookshelff').setScale(.3);
@@ -927,7 +987,6 @@ class Level3Past extends Phaser.Scene{
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('bedp', 'bed_past.png');
         this.load.image('bookshelfp', 'bookshelf_past.png');
         this.load.image('carpetp', 'carpet_past-min.png');
         this.load.image('chairp', 'chair_past-min.png');
@@ -938,6 +997,17 @@ class Level3Past extends Phaser.Scene{
         this.load.image('player', 'player.png');
     }
     create(){
+        if(mopp == true){
+            this.caption = this.add.text(900, 1000, "[Music]").setFontSize(30);
+        }
+
+        this.tweens.add({
+            targets: this.caption,
+            alpha: {from: 1, to: 0},
+            duration: 5000,
+            ease: 'Linear',
+        })
+
         this.cameras.main.fadeIn(1000,0,0,0);
 
         this.bookshelf = this.add.image(1400, 150, 'bookshelfp').setScale(.3);
