@@ -22,3 +22,5 @@ Pixel grandfather clock on main menu - https://www.pixilart.com/art/grandfather-
 Royalty free audio assets - Pixabay
 Logo created by Harry Chou
 Rest of assets were made by Aidan Andearsen
+
+Notes: **Fullscreen doesn't work on IOS mobile due to Phaser 3 fullscreen not being supported on there. Nothing we could do to fix this as this is just a core problem with Phaser**
