@@ -527,7 +527,7 @@ class Level2Future extends Phaser.Scene {
         this.load.image('chairf', 'chair_future-min.png');
         this.load.image('couchf', 'couch_future.png');
         this.load.image('doorf', 'door_future.png');
-        this.load.image('tvf', 'tv_future-min.png');
+        this.load.image('tvf', 'tv_future.png');
         this.load.image('tablef', 'table_future.png');
         this.load.image('player', 'player.png');
     }
@@ -837,7 +837,7 @@ class Level3Future extends Phaser.Scene {
         this.load.image('chairf', 'chair_future-min.png');
         this.load.image('couchf', 'couch_future.png');
         this.load.image('doorf', 'door_future.png');
-        this.load.image('tvf', 'tv_future-min.png');
+        this.load.image('tvf', 'tv_future.png');
         this.load.image('tablef', 'table_future.png');
         this.load.image('player', 'player.png');
     }

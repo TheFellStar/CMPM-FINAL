@@ -361,20 +361,45 @@ class FinalLock extends Phaser.Scene {
     create(){
         this.add.text(50, 50, "Who are you investigating? Two letters").setFontSize(50);
         this.add.image(960, 540, 'lock');
-        this.input.keyboard.createCombo('ME');
-        this.input.keyboard.on('keycombomatch', () => {
-            this.add.text(875, 575, "M", {color: "#000000"}).setFontSize(100);
-            this.add.text(1020, 575, "E", {color: "#000000"}).setFontSize(100);
-            this.scene.stop('level3past');
-            this.scene.stop('finallock');
-            this.scene.start('end');
+
+        this.i = 0;
+        this.j = 0;
+        this.array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        this.left = this.add.text(875, 575, this.array[this.i], {color: "#000000"}).setFontSize(100);
+        this.left.setInteractive();
+        this.right = this.add.text(1020, 575, this.array[this.j], {color: "#000000"}).setFontSize(100);
+        this.right.setInteractive();
+
+        this.left.on('pointerdown', () => {
+            if(this.i == 25){
+                this.i = 0;
+            }else{
+                this.i++;
+            }
+            this.left.setText(this.array[this.i]);
         })
+        this.right.on('pointerdown', () => {
+            if(this.j == 25){
+                this.j = 0;
+            }else{
+                this.j++;
+            }
+            this.right.setText(this.array[this.j]);
+        })
+
         this.back = this.add.text(1700, 900, "Back").setFontSize(50);
         this.back.setInteractive();
         this.back.on('pointerdown', () => {
             this.scene.resume('level3past');
             this.scene.stop('finallock');
         })
+    }
+    update(){
+        if(this.i == 12 && this.j == 4){
+            this.scene.stop('level3past');
+            this.scene.stop('finallock');
+            this.scene.start('end');
+        }
     }
 }
 
