@@ -176,11 +176,11 @@ class Level1Alt extends Phaser.Scene {
         this.load.image('bedp', 'bed_past.png');
         this.load.image('bookshelfp', 'bookshelf_past.png');
         this.load.image('carpetp', 'carpet_past-min.png');
-        this.load.image('chairp', 'chair_past.png');
+        this.load.image('chairp', 'chair_past-min.png');
         this.load.image('doorp', 'door_past.png');
         this.load.image('sofa', 'sofa_past.png');
         this.load.image('tablep', 'table_past.png');
-        this.load.image('tvp', 'tv_past.png');
+        this.load.image('tvp', 'tv_past-min.png');
         this.load.image('player', 'player.png');
     }
     create(){
@@ -495,10 +495,10 @@ class Level2Future extends Phaser.Scene {
         this.load.image('bedf', 'bed_future.png');
         this.load.image('bookshelff', 'bookshelf_future.png');
         this.load.image('carpetf', 'carpet_future-min.png');
-        this.load.image('chairf', 'chair_future.png');
+        this.load.image('chairf', 'chair_future-min.png');
         this.load.image('couchf', 'couch_future.png');
         this.load.image('doorf', 'door_future.png');
-        this.load.image('tvf', 'tv_future.png');
+        this.load.image('tvf', 'tv_future-min.png');
         this.load.image('tablef', 'table_future.png');
         this.load.image('player', 'player.png');
     }
@@ -785,10 +785,10 @@ class Level3Future extends Phaser.Scene {
         this.load.image('bedf', 'bed_future.png');
         this.load.image('bookshelff', 'bookshelf_future.png');
         this.load.image('carpetf', 'carpet_future-min.png');
-        this.load.image('chairf', 'chair_future.png');
+        this.load.image('chairf', 'chair_future-min.png');
         this.load.image('couchf', 'couch_future.png');
         this.load.image('doorf', 'door_future.png');
-        this.load.image('tvf', 'tv_future.png');
+        this.load.image('tvf', 'tv_future-min.png');
         this.load.image('tablef', 'table_future.png');
         this.load.image('player', 'player.png');
     }
@@ -930,11 +930,11 @@ class Level3Past extends Phaser.Scene{
         this.load.image('bedp', 'bed_past.png');
         this.load.image('bookshelfp', 'bookshelf_past.png');
         this.load.image('carpetp', 'carpet_past-min.png');
-        this.load.image('chairp', 'chair_past.png');
+        this.load.image('chairp', 'chair_past-min.png');
         this.load.image('doorp', 'door_past.png');
         this.load.image('sofa', 'sofa_past.png');
         this.load.image('tablep', 'table_past.png');
-        this.load.image('tvp', 'tv_past.png');
+        this.load.image('tvp', 'tv_past-min.png');
         this.load.image('player', 'player.png');
     }
     create(){
